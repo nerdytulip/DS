@@ -47,6 +47,6 @@ public class primefactors {
     }
     public static void main(String[] args){
         int n = 23;
-        System.out.println(primeFactors(n));
+        System.out.println(primeFactors(315));
     }
 }

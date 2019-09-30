@@ -131,8 +131,9 @@ public class largest_smallest {
 other than the below method the initial method of sorting an array using
 any sorting algo is also valid and has a time complexity of nlogn
 The below method has a time complexity of nlogk with extra space complexity O(k)*/
+//priority queue is by default min heap
 
-static int findKthLargest(int arr[],int k){
+    static int findKthLargest(int arr[],int k){
         PriorityQueue<Integer> q = new PriorityQueue<>(k);
         for(int i: arr){
             q.offer(i);//same as add method
@@ -143,6 +144,29 @@ static int findKthLargest(int arr[],int k){
         }
         return q.peek();
     }
+    //above solution is implemented using minheap as priority queue is by default min heap;i.e min element at top
+    //below solution is of TC-O(n+klogn)
+    /*1) Build a Max Heap tree in O(n)
+      2) Use Extract Max k times to get k maximum elements
+      from the Max Heap O(klogn)*/
+    /*https://www.techiedelight.com/find-kth-largest-element-array/*/
+    static int find_Kth_largestelement(int arr[],int k){
+     PriorityQueue<Integer> maxheap = new PriorityQueue<>(10, new Comparator<Integer>() {
+         @Override
+         public int compare(Integer a, Integer b) {
+             return b-a;
+         }
+     });
+     for (int i=0;i<arr.length;i++){
+         maxheap.add(arr[i]);
+     }
+     //pop exactly k-1 times
+     while (--k>0){
+         maxheap.poll();
+     }
+     return maxheap.peek();
+    }
+
     static void findKthSmallest(int arr[],int k){
      PriorityQueue<Integer> minheap = new PriorityQueue<>(new Comparator<Integer>() {
          @Override
@@ -160,6 +184,20 @@ static int findKthLargest(int arr[],int k){
      System.out.println(minheap.peek());
      //return minheap.peek();
     }
+
+    //Below solution is of complexity TC-O(n+klogn)
+    /*@https://www.techiedelight.com/find-kth-smallest-element-array/*/
+    static int find_Kth_smallestelement(int arr[],int k){
+        PriorityQueue<Integer> minheap = new PriorityQueue<>();
+        for (int i=0;i<arr.length;i++){
+            minheap.add(arr[i]);
+        }
+        while (--k>0){
+            minheap.poll();
+        }
+        return minheap.peek();
+    }
+
     /*https://www.geeksforgeeks.org/given-an-array-of-numbers-arrange-the-numbers-to-form-the-biggest-number/*/
     static void printlargest(ArrayList<String> a){
      Collections.sort(a, new Comparator<String>() {
@@ -179,6 +217,8 @@ static int findKthLargest(int arr[],int k){
         int []arr = {10, 324, 45,
                 90, 9808};
         int n = arr.length;
+        System.out.println("kth largest element"+" "+find_Kth_largestelement(arr,1));
+        System.out.println("kth smallest element"+find_Kth_smallestelement(arr,2));
         /*System.out.println(Largest(arr, n));
         System.out.println( "Minimum element"
                 + " of array: " + getMin(arr, n));
@@ -191,7 +231,7 @@ static int findKthLargest(int arr[],int k){
         System.out.println(largest3(arr,n));
         System.out.println(findKthLargest(arr,2));*/
         //System.out.println(findKthSmallest(arr,2));
-        findKthSmallest(arr,2);
+       // findKthSmallest(arr,2);
         ArrayList<String> a = new ArrayList<>();
         a.add("54");
         a.add("546");
