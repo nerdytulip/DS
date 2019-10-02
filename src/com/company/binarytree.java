@@ -1,18 +1,7 @@
 package com.company;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 import java.util.LinkedList;
-import java.util.Queue;
-
-/*class Node{
-    int key;
-    Node left,right;
-    public Node(int item){
-        key=item;
-        right=left=null;
-    }
-}*/
 
 public class binarytree {
     static class Node{
@@ -31,7 +20,7 @@ public class binarytree {
         if(temp==null)
             return;
         inorder(temp.left);
-        System.out.println(temp.key+" ");
+        System.out.print(temp.key+" ");
         inorder(temp.right);
     }
     //preorder-(root,left,right)
@@ -153,6 +142,25 @@ public class binarytree {
             }
         }
     }
+
+    static void DFS(Node root){
+        if(root==null)
+            return;
+        Stack<Node> stack = new Stack<Node>();
+        stack.push(root);
+
+        while (!stack.isEmpty()){
+            Node node = stack.pop();
+            System.out.print(node.key+" ");
+            if (node.right!=null){
+                stack.push(node.right);
+            }
+            if (node.left!=null){
+                stack.push(node.left);
+            }
+        }
+    }
+
     static void reverseLevelOrderTraversal(Node root){
         if(root==null){
             return;
@@ -385,7 +393,8 @@ public class binarytree {
         root2.left.left=new Node(4);
         root2.left.right=new Node(5);
 
-
+        System.out.println("inorder traversal");
+        inorder(root1);
         if (isIdentical(x, y)) {
             System.out.println("Given binary Trees are identical");
         } else {
