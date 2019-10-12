@@ -201,6 +201,65 @@ class LinkedList {
          node= prev;
      }
 
+     /*@https://www.geeksforgeeks.org/reverse-a-list-in-groups-of-given-size/*/
+     Node reverse_in_groupsofk(Node head,int k){
+         Node current=head;
+         Node next=null;
+         Node prev=null;
+         int count =0;
+         while(count<k && current!=null){
+             next=current.next;
+             current.next=prev;
+
+             prev=current;
+             current=next;
+             count++;
+         }
+
+         if (next!=null){
+             head.next=reverse_in_groupsofk(next,k);
+         }
+         return prev;
+     }
+
+     Node reverse_even_elements(Node head,Node prev){
+         if (head == null)
+             return null;
+         Node next = null;
+         Node current = head;
+         while (current!=null && current.data%2==0){
+             next=current.next;
+             current.next=prev;
+             prev=current;
+             current=next;
+         }
+         if (current!=head){
+             head.next=current;
+             current=reverse_even_elements(current,null);
+             return prev;
+         }
+         else{
+             head.next=reverse_even_elements(head.next,head);
+             return head;
+         }
+
+     }
+
+     Node merge(Node h1,Node h2){
+         if (h1==null)
+             return h2;
+         if (h2==null)
+             return h1;
+         if (h1.data<h2.data){
+             h1.next=merge(h1.next,h2);
+             return h1;
+         }
+         else{
+             h2.next=merge(h1,h2.next);
+             return h2;
+         }
+     }
+
      boolean ispalindrome(Node head){
          Node slow = head;
          boolean ispalin = true;
