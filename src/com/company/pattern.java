@@ -9,6 +9,14 @@ public class pattern {
             }
             System.out.print("\n");
         }
+
+        h=h-1;
+        for (int i=nr;i>0;i--){
+            for (int j=1;j<=i;j++,h--){
+                System.out.print(h);
+            }
+            System.out.print("\n");
+        }
     }
 
     public static void main(String[] args){

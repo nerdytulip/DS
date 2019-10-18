@@ -1,9 +1,114 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+
 
 public class directi {
+     static final int no_of_chars=256;
+    /*static class util{
+        String res="";
+    }*/
+    static String removeChar(String s,char c){
+        int j,count=0,n=s.length();
+        char t[]=s.toCharArray();
+        for(int i=j=0;i<n;i++){
+            if (t[i]!=c){
+                t[j++]=t[i];
+            }
+            else {
+                count++;
+            }
+        }
+        while (count>0){
+            t[j++]='\0';
+            count--;
+        }
+        //System.out.println(t);
+        String sres = new String(t);
+        return sres;
+    }
+
+    static String minimum_window_containing_allcharOfA(String A,String S){
+        int len1=S.length();
+        int len2=A.length();
+        if(len1<len2){
+            return "";
+        }
+        int hash_pat[]=new int[no_of_chars];
+        int hash_str[]=new int[no_of_chars];
+        for(int i=0;i<len2;i++){
+            hash_pat[A.charAt(i)]++;
+        }
+        int start=0,start_index=-1,min_len=Integer.MAX_VALUE;
+        int count =0;
+        for(int j=0;j<len1;j++){
+            hash_str[S.charAt(j)]++;
+
+            if(hash_pat[S.charAt(j)]!=0 && hash_str[S.charAt(j)]<=hash_pat[S.charAt(j)]){
+                count++;
+            }
+            if(count == len2){
+                while (hash_str[S.charAt(start)]>hash_pat[S.charAt(start)]||
+                        hash_pat[S.charAt(start)]==0){
+                    if (hash_str[S.charAt(start)]>hash_pat[S.charAt(start)])
+                        hash_str[S.charAt(start)]--;
+                    start++;
+                }
+                int len_window=j-start+1;
+                if (min_len>len_window){
+                    min_len=len_window;
+                    start_index=start;
+                }
+            }
+        }
+        if (start_index==-1)
+            return "";
+
+        return S.substring(start_index,start_index+min_len);
+    }
+
+    static void solve_utility(String A,String S,int K){
+        ArrayList<Character> l = new ArrayList<>();
+        for(int i=0;i<S.length();i++){
+            if(A.indexOf(S.charAt(i))==-1){
+                if(!l.contains(S.charAt(i))){
+                l.add(S.charAt(i));}
+            }
+        }
+        int min_length=Integer.MAX_VALUE;
+        //key=length ,value=removed character that caused it
+        HashMap<Integer,Character> map = new HashMap<>();
+        StringBuilder res= new StringBuilder();
+        for (Character character : l) {
+            String r = removeChar(S, character);
+            String test=minimum_window_containing_allcharOfA(A,r);
+            //System.out.println(test);
+            if ((!test.equals("")) && test.length()>=K) {
+                map.put(test.length(),character);
+                //String temp = Character.toString(character);
+                //res.append(temp);
+            }
+        }
+
+        for(Integer key:map.keySet()){
+            if(key<min_length)
+                min_length=key;
+        }
+        String temp =Character.toString(map.get(min_length));
+        res.append(temp);
+        System.out.println(res);
+        //return res.toString();
+    }
+
+   /* static void solve(String A,String S,int K){
+        util m= new util();
+        solve_utility(A,S,K,m);
+        //String result=Integer.toString(m.res.length()) +"\n"+m.res;
+        System.out.println(m.res);
+    }*/
 
     //nlogn
     //https://www.geeksforgeeks.org/find-the-point-where-maximum-intervals-overlap/
@@ -116,5 +221,12 @@ public class directi {
         }else{
             System.out.println("False");
         }
+
+        String S="hackerearthproblem";
+        String A="eapth";
+        int K=5;
+       solve_utility(A,S,K);
+       //System.out.println("anwer is"+result);
+        //solve(A,S,K);
     }
 }
