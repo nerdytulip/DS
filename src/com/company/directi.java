@@ -1,16 +1,11 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 
 public class directi {
      static final int no_of_chars=256;
-    /*static class util{
-        String res="";
-    }*/
+    /*@https://www.geeksforgeeks.org/remove-all-occurrences-of-a-character-in-a-string/*/
     static String removeChar(String s,char c){
         int j,count=0,n=s.length();
         char t[]=s.toCharArray();
@@ -31,6 +26,7 @@ public class directi {
         return sres;
     }
 
+    /*@https://www.geeksforgeeks.org/find-the-smallest-window-in-a-string-containing-all-characters-of-another-string/*/
     static String minimum_window_containing_allcharOfA(String A,String S){
         int len1=S.length();
         int len2=A.length();
@@ -70,6 +66,10 @@ public class directi {
         return S.substring(start_index,start_index+min_len);
     }
 
+    /*You are given two Strings S and A that consists of lowercase latin letters.Your task is to determine the number of special characters in S,A character is
+    said to be special if you remove all the occurences of that character from S,then:
+     1.You get a substring M of the length greater than or equal to K
+     2.M only consists of characters present in the String A*/
     static void solve_utility(String A,String S,int K){
         ArrayList<Character> l = new ArrayList<>();
         for(int i=0;i<S.length();i++){
@@ -82,23 +82,38 @@ public class directi {
         //key=length ,value=removed character that caused it
         HashMap<Integer,Character> map = new HashMap<>();
         StringBuilder res= new StringBuilder();
+        char a[]=A.toCharArray();
+        Arrays.sort(a);
+        String string_a = new String(a);
+        int i=0;
         for (Character character : l) {
             String r = removeChar(S, character);
             String test=minimum_window_containing_allcharOfA(A,r);
             //System.out.println(test);
             if ((!test.equals("")) && test.length()>=K) {
-                map.put(test.length(),character);
+                char temp[]=test.toCharArray();
+                Arrays.sort(temp);
+                String string_temp = new String(temp);
+                if (string_temp.equals(string_a)){
+                map.put(i,character);
+                i++;}
                 //String temp = Character.toString(character);
                 //res.append(temp);
             }
         }
 
-        for(Integer key:map.keySet()){
-            if(key<min_length)
-                min_length=key;
+
+//        for(Integer key:map.keySet()){
+//            if(key<min_length)
+//                min_length=key;
+//        }
+        Iterator mapiter=map.entrySet().iterator();
+        while(mapiter.hasNext()){
+            Map.Entry mapkey =(Map.Entry)mapiter.next();
+            char c=((char)mapkey.getValue());
+            String temp =Character.toString(c);
+            res.append(temp);
         }
-        String temp =Character.toString(map.get(min_length));
-        res.append(temp);
         System.out.println(res);
         //return res.toString();
     }
