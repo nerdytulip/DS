@@ -126,6 +126,7 @@ public class binarytree {
         }
     }
     //BFS uses queue,TC-O(n) and SC-O(n)
+    //levelorder traversal
     static void BFS(Node root){
         Queue<Node> q = new ArrayDeque<>();
         q.add(root);

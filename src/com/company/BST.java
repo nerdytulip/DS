@@ -402,7 +402,74 @@ public class BST {
             return distancefromroot(root,a)+distancefromroot(root,b);
         return 0;
     }
+    static void storeinorder(Node root,ArrayList<Integer> l){
+        if (root==null)
+            return;
+        storeinorder(root.left,l);
+        l.add(root.key);
+        storeinorder(root.right,l);
+    }
+    static void pairSum_util(ArrayList<Integer> l1,ArrayList<Integer> l2,int sum){
+        int left=0;
+        int right=l2.size()-1;
+        while(left<l1.size() && right>=0){
+            if (l1.get(left)+l2.get(right)==sum){
+                System.out.println( "(" +l1.get(left) + ", "+ l2.get(right) + "), ");
+                left++;
+                right--;
+            }
+            // If sum is more, move to higher value in
+            // first Vector.
+            else if (l1.get(left) + l2.get(right) < sum)
+                left++;
 
+                // If sum is less, move to lower value in
+                // second Vector.
+            else
+                right--;
+        }
+    }
+
+    static void pairsum(Node root1,Node root2,int sum){
+        ArrayList<Integer> l1=new ArrayList<>();
+        ArrayList<Integer> l2=new ArrayList<>();
+        storeinorder(root1,l1);
+        storeinorder(root2,l2);
+        pairSum_util(l1,l2,sum);
+    }
+
+    //catalan number,given n keys from 1 to n how many distinct bst can be formed
+    /*https://www.youtube.com/watch?v=YDf982Lb84o*/
+    /*https://www.youtube.com/watch?v=GgP75HAvrlY*/
+    /*https://github.com/mission-peace/interview/blob/master/src/com/interview/dynamic/CountNumberOfTreesInBST.java*/
+    /*this approach is dynamic progarmming as we can divide the problem in
+    * sub-problems and use them for future calculations
+    * TC-O(n^2) SC-O(n)*/
+   static int countTrees(int n){
+       int T[]=new int[n+1];
+       T[0]=1;
+       T[1]=1;
+       for (int i=2;i<=n;i++){
+           for (int j=0;j<i;j++){
+               T[i]+=T[j]*T[i-j-1];
+           }
+       }
+       return T[n];
+   }
+   static int countTreesRec(int numkeys){
+       if(numkeys<=1)
+           return (1);
+       else {
+           int sum=0;
+           int left,right,root;
+           for (root=1;root<=numkeys;root++){
+               left=countTreesRec(root-1);//i-1
+               right=countTreesRec(numkeys-root);//n-i
+               sum+=left*right;
+           }
+           return (sum);
+       }
+   }
     public static void main(String[] args){
         Node root =null;
         int keys[] ={15,10,20,8,12,16,25};
@@ -447,5 +514,27 @@ public class BST {
        Node t = LCA(root,n1,n2);
 
        System.out.println("lca of"+n1+"and"+n2+"is"+t.key);
+
+        Node root1 = null;
+        root1 = insert(root1, 8);
+        root1 = insert(root1, 10);
+        root1 = insert(root1, 3);
+        root1 = insert(root1, 6);
+        root1 = insert(root1, 1);
+        root1 = insert(root1, 5);
+        root1 = insert(root1, 7);
+        root1 = insert(root1, 14);
+        root1 = insert(root1, 13);
+
+        Node root2 = null;
+        root2 = insert(root2, 5);
+        root2 = insert(root2, 18);
+        root2 = insert(root2, 2);
+        root2 = insert(root2, 1);
+        root2 = insert(root2, 3);
+        root2 = insert(root2, 4);
+        pairsum(root1,root2,10);
+        int N=4;
+        System.out.println("N :"+countTreesRec(N));
     }
 }

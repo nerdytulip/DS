@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.*;
 
-public class greedy {
+public class greedy_dc {
    /*https://www.geeksforgeeks.org/maximum-product-subset-array/*/
 static int maxProductSubset(int a[],int n){
     if(n==1)
@@ -390,7 +390,106 @@ static int maxSubArraySum(int arr[],int l,int h){
     return Math.max(Math.max(maxSubArraySum(arr,l,m),
             maxSubArraySum(arr,m+1,h)),maxCrossingSum(arr,l,m,h));
 }
+static class Pair{
+    private int start,finish;
+    public Pair(int start,int finish){
+        this.start=start;
+        this.finish=finish;
+    }
+    public int getFinish(){
+        return finish;
+    }
+    public int getStart(){
+        return start;
+    }
+    public String toString(){
+        return "{"+getStart()+","+getFinish()+"}";
+    }
+}
+static Set<Integer> selectActivity(List<Pair> activities){
+    int k =0;
+    Set<Integer> out = new HashSet<>();
+    out.add(0);
+    for (int i=1;i<activities.size();i++){
+        if (activities.get(i).getStart() >= activities.get(k).getFinish()){
+            out.add(i);
+            k=i;
+        }
+    }
+    return out;
+}
 
+/*https://www.geeksforgeeks.org/policemen-catch-thieves/
+the idea is to get lowest index of policeman p and thief t.
+make an allotment if |p-t|<=k and increment to the next p and t found
+otherwise increment min(p,t) to the next p or t found
+repeat above two steps until next p and t are found
+return the allotments made
+*/
+
+static int PoliceThief(char[] a,int n,int k){
+    int res=0;
+    ArrayList<Integer> thi = new ArrayList<>();
+    ArrayList<Integer> pol = new ArrayList<>();
+    for(int i=0;i<n;i++){
+        if (a[i]=='P')
+            pol.add(i);
+        else if (a[i]=='T')
+            thi.add(i);
+    }
+    int l=0,r=0;
+    while (l<thi.size() && r<pol.size()){
+        if (Math.abs(thi.get(l)-pol.get(r))<=k){
+            res++;
+            l++;
+            r++;
+        }
+        else if (thi.get(l)<pol.get(r))
+            l++;
+        else
+            r++;
+    }
+    return res;
+}
+
+/*
+Let there be a subarray (i, j) whose sum is divisible by k
+  sum(i, j) = sum(0, j) - sum(0, i-1)
+Sum for any subarray can be written as q*k + rem where q
+is a quotient and rem is remainder
+Thus,
+    sum(i, j) = (q1 * k + rem1) - (q2 * k + rem2)
+    sum(i, j) = (q1 - q2)k + rem1-rem2
+
+We see, for sum(i, j) i.e. for sum of any subarray to be
+divisible by k, the RHS should also be divisible by k.
+(q1 - q2)k is obviously divisible by k, for (rem1-rem2) to
+follow the same, rem1 = rem2 where
+    rem1 = Sum of subarray (0, j) % k
+    rem2 = Sum of subarray (0, i-1) % k
+    @https://www.geeksforgeeks.org/count-sub-arrays-sum-divisible-k/
+* So if any sub-array sum from index i’th to j’th is divisible by k then we can saya[0]+…a[i-1] (mod k) = a[0]+…+a[j] (mod k)
+So we need to find such a pair of indices (i, j) that they satisfy the above condition. Here is the algorithm :
+Make an auxiliary array of size k as Mod[k] . This array holds the count of each remainder we are getting after dividing cumulative sum till any index in arr[].
+Now start calculating cumulative sum and simultaneously take it’s mod with K, whichever remainder we get increment count by 1 for remainder as index in Mod[] auxiliary array. Sub-array by each pair of positions with same value of ( cumSum % k) constitute a continuous range whose sum is divisible by K.
+Now traverse Mod[] auxiliary array, for any Mod[i] > 1 we can choose any to pair of indices for sub-array by (Mod[i]*(Mod[i] – 1))/2 number of ways . Do the same for all remainders < k and sum up the result that will be the number all possible sub-arrays divisible by K.*/
+static int subarray_with_sum_div_by_k(int a[],int n,int k){
+    int mod[]=new int[k];
+    Arrays.fill(mod,0);
+    int currSum=0;
+    for (int i=0;i<n;i++){
+        currSum+=a[i];
+        mod[((currSum%k)+k)%k]++;
+    }
+    int result=0;
+    for (int i=0;i<k;i++){
+        if (mod[i]>1){
+            result+=(mod[i]*(mod[i]-1))/2;
+        }
+    }
+    result+=mod[0];
+    return result;
+}
 public static void main(String[] args){
   /*int a[]={-1,-1,-2,4,3};
   int n = a.length;
@@ -420,5 +519,19 @@ public static void main(String[] args){
     int b[]  = {-2, 3, -5};
     int n = 3, k = 5;
     System.out.println(minProd(a,b,n,k));
-}
+    List<Pair> activities = Arrays.asList(new Pair(1, 4), new Pair(3, 5),
+            new Pair(0, 6), new Pair(5, 7), new Pair(3, 8),
+            new Pair(5, 9), new Pair(6, 10), new Pair(8, 11),
+            new Pair(8, 12), new Pair(2, 13), new Pair(12, 14));
+     Collections.sort(activities, new Comparator<Pair>() {
+         @Override
+         public int compare(Pair o1, Pair o2) {
+             return o1.getFinish() - o2.getFinish();
+         }
+     });
+     Set<Integer> res = selectActivity(activities);
+     for (Integer i:res){
+         System.out.println(activities.get(i));
+     }
+ }
 }

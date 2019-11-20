@@ -222,6 +222,22 @@ public class directi {
         }
         return true;
     }
+
+    /*https://www.geeksforgeeks.org/find-a-tour-that-visits-all-stations/
+    https://www.youtube.com/watch?v=nTKdYm_5-ZY
+    */
+    static int getTour(int petrol[],int dist[],int n){
+        int sum=0,start=0,diff=0;
+        for (int i=0;i<n;i++){
+            sum=sum+petrol[i]-dist[i];
+            if (sum<0){
+                start=i+1;//changing the start point
+                diff+=sum;//storing the negative value
+                sum=0;//starting again
+            }
+        }
+        return sum+diff>=0?start:-1;
+    }
     public static void main(String[] args){
         int arrl[] ={1,2,10,5,5};
         int exit[]={4,5,12,9,12};
@@ -241,7 +257,12 @@ public class directi {
         String A="eapth";
         int K=5;
        solve_utility(A,S,K);
-       //System.out.println("anwer is"+result);
+        //System.out.println("anwer is"+result);
         //solve(A,S,K);
+
+       int petrol[]={4,6,7,4};
+       int dist[]={6,5,3,5};
+       System.out.println(getTour(petrol,dist,4));
+
     }
 }

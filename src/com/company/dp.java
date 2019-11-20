@@ -97,6 +97,7 @@ public class dp {
     /*Given an array of non negative numbers and a total, is there subset of numbers in this array which adds up
      * to given total.*/
     //TC-O(m*n)
+    //https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
     static boolean SubsetSum(int input[],int total){
        boolean T[][]=new boolean[input.length+1][total +1];
        for(int i=0;i<=input.length;i++){
@@ -247,6 +248,165 @@ public class dp {
 
      return max;
     }
+
+    //TC-O(n)
+    static void maximumsumSubarr_kadane(int arr[]){
+        int maxsoFar=0,maxEndingHere=0,start=0,end=0;
+        int beg=0;//stores starting index of a positive sum sequence
+        for (int i=0;i<arr.length;i++){
+            maxEndingHere=maxEndingHere+arr[i];
+            if (maxEndingHere<0){
+                maxEndingHere=0;
+                beg=i+1;
+            }
+            if (maxsoFar<maxEndingHere){
+                maxsoFar=maxEndingHere;
+                start=beg;
+                end=i;
+            }
+        }
+        System.out.println("largest sum"+maxsoFar);
+        System.out.print("the max sub array is");
+        for (int i=start;i<end;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+    /* Write a program to find maximum sum rectangle in give 2D matrix.
+     * Assume there is at least one positive number in the 2D matrix.
+     *
+     * Solution:
+     * Keep temp array with size as number of rows. Start left and right from 0
+     * and keep adding values for each row and maintain them in this temp array.
+     * Run Kadane's algorithm to find max sum subarray in temp. Now increment right by
+     * 1. When right reaches last column reset right to 1 and left to 1.
+     *
+     * Space complexity of this algorithm is O(row)
+     * Time complexity of this algorithm is O(row*col*col)
+     *
+     * References
+     * https://www.youtube.com/watch?v=yCQN096CwWM
+     * http://www.geeksforgeeks.org/dynamic-programming-set-27-max-sum-rectangle-in-a-2d-matrix/
+     */
+    static class Result{
+     int maxSum;
+     int leftbound;
+     int rightbound;
+     int upbound;
+     int lowbound;
+    }
+    static class kadaneResult{
+        int maxSum;
+        int end;
+        int start;
+    }
+    static void kadane(int in[],kadaneResult kadaneresult){
+        int max=0, maxstart=-1,maxend=-1,currstart=0,maxsofar=0;
+        for (int i=0;i<in.length;i++){
+            maxsofar+=in[i];
+            if (maxsofar<0){
+                maxsofar=0;
+                currstart=i+1;
+            }
+            if (max<maxsofar){
+                maxstart=currstart;
+                maxend=i;
+                max=maxsofar;
+            }
+        }
+        kadaneresult.maxSum=max;
+        kadaneresult.start=maxstart;
+        kadaneresult.end=maxend;
+    }
+    static void maxSumRectangle_util(int in[][],Result result,kadaneResult kadaneresult){
+       int r=in.length;
+       int c=in[0].length;
+       int temp[]=new int[r];
+       for (int left=0;left<c;left++){
+           for (int i=0;i<r;i++){
+               temp[i]=0;
+           }
+           for (int right=left;right<c;right++){
+               for (int i=0;i<r;i++){
+                   temp[i]+=in[i][right];
+               }
+               kadane(temp,kadaneresult);
+               if (kadaneresult.maxSum>result.maxSum){
+                   result.maxSum=kadaneresult.maxSum;
+                   result.leftbound=left;
+                   result.rightbound=right;
+                   result.upbound=kadaneresult.start;
+                   result.lowbound=kadaneresult.end;
+               }
+           }
+       }
+    }
+    static void maxSum(int in[][]){
+        Result result=new Result();
+        kadaneResult kadaneresult=new kadaneResult();
+        maxSumRectangle_util(in,result,kadaneresult);
+        System.out.println("maxsum"+result.maxSum+" ,leftbound "+result.leftbound+" ,rightbound "+result.rightbound
+                +"  upbound"+result.upbound+"  lowbound"+result.lowbound);
+    }
+
+    static int dynamicEditDistance(char[] str1, char[] str2){
+        int temp[][] = new int[str1.length+1][str2.length+1];
+
+        for(int i=0; i < temp[0].length; i++){
+            temp[0][i] = i;
+        }
+
+        for(int i=0; i < temp.length; i++){
+            temp[i][0] = i;
+        }
+
+        for(int i=1;i <=str1.length; i++){
+            for(int j=1; j <= str2.length; j++){
+                if(str1[i-1] == str2[j-1]){
+                    temp[i][j] = temp[i-1][j-1];
+                }else{
+                    temp[i][j] = 1 + min(temp[i-1][j-1], temp[i-1][j], temp[i][j-1]);
+                }
+            }
+        }
+        printActualEdits(temp, str1, str2);
+        return temp[str1.length][str2.length];
+
+    }
+
+    /**
+     * Prints the actual edits which needs to be done.
+     */
+    static void printActualEdits(int T[][], char[] str1, char[] str2) {
+        int i = T.length - 1;
+        int j = T[0].length - 1;
+        while(true) {
+            if (i == 0 || j == 0) {
+                break;
+            }
+            if (str1[i-1] == str2[j-1]) {
+                i = i-1;
+                j = j-1;
+            } else if (T[i][j] == T[i-1][j-1] + 1){
+                System.out.println("Edit " + str2[j-1] + " in string2 to " + str1[i-1] + " in string1");
+                i = i-1;
+                j = j-1;
+            } else if (T[i][j] == T[i-1][j] + 1) {
+                System.out.println("Delete in string1 " + str1[i-1]);
+                i = i-1;
+            } else if (T[i][j] == T[i][j-1] + 1){
+                System.out.println("Delete in string2 " + str2[j-1]);
+                j = j -1;
+            } else {
+                throw new IllegalArgumentException("Some wrong with given data");
+            }
+
+        }
+    }
+
+    static int min(int a,int b, int c){
+        int l = Math.min(a, b);
+        return Math.min(l, c);
+    }
     public static void main(String[] args){
        /* String A ="site:GeeksforGeeks.org";
         String B ="site:GeeksQuiz.com";
@@ -269,11 +429,25 @@ public class dp {
         }*/
        //System.out.println(partition(arr1));
 
-       int val[]={60,100,120};
+      /* int val[]={60,100,120};
        int wt[]={10,20,30};
        int W=50;
        int n = val.length;
-       System.out.println(knapsack_01(W,wt,val,n));
+       System.out.println(knapsack_01(W,wt,val,n));*/
+
+      /* int a[]={-2,-3,4,-1,-2,1,5,-3};
+       maximumsumSubarr_kadane(a);*/
+
+       int in[][]={{ 2,  1, -3, -4,  5},
+               { 0,  6,  3,  4,  1},
+               { 2, -2, -1,  4, -5},
+               {-3,  3,  1,  0,  3}};
+       maxSum(in);
+
+       String str1="azced";
+       String str2="abcdef";
+       int result=dynamicEditDistance(str1.toCharArray(),str2.toCharArray());
+       System.out.println(result);
     }
 }
 
