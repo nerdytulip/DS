@@ -156,6 +156,72 @@ public class Strings {
         }
         return T[str1.length][str2.length];
     }
+
+    //https://www.geeksforgeeks.org/count-pairs-of-characters-in-a-string-whose-ascii-value-difference-is-k/
+    static int pairsWithKdifference_of_ascii(char[] str,int k){
+       int MAX=26;
+       int n=str.length;
+       int freq[]=new int[MAX];
+       for (int i=0;i<n;i++){
+           freq[str[i]-'a']++;
+       }
+       int count=0;
+       if (k==0){
+           for(int i=0;i<MAX;i++){
+               if (freq[i]>1){
+                   count+= ((freq[i])*(freq[i]-1)/2);
+               }
+           }
+       }
+       else{
+           for (int i=0;i<MAX;i++){
+               if (freq[i]>0 && i+k<MAX && freq[i+k]>0){
+                   count+=(freq[i]*freq[i+k]);
+               }
+           }
+       }
+       return count;
+    }
+
+    static int patternCount_101(String str){
+        int last=str.charAt(0);
+        int i=1,count=0;
+        while(i<str.length()){
+            if (str.charAt(i)=='0' && last=='1'){
+                while(str.charAt(i)=='0')
+                    i++;
+                if (str.charAt(i)=='1')
+                    count++;
+            }
+            last=str.charAt(i);
+            i++;
+        }
+        return count;
+    }
+
+    static int smallest_positive_missing(int a[]){
+        int val;//stores current array element
+        int nextval;//stores the next array element in the current traversal
+        for (int i=0;i<a.length;i++){
+            if (a[i]<=0||a[i]>a.length)
+                continue;
+            val=a[i];
+            while(a[val-1]!=val){
+                nextval=a[val-1];
+                a[val-1]=val;
+                val=nextval;
+                if (val<=0 ||val>a.length)
+                    break;
+            }
+        }
+        for (int i=0;i<a.length;i++){
+            if (a[i]!=i+1)
+                return i+1;
+        }
+        //if all indices are marked,the return
+        //smallest missing positive as arraysize+1
+        return a.length+1;
+    }
     public static void main(String[] args){
 
         String str = "acacacacacacac";
@@ -182,5 +248,6 @@ public class Strings {
         String s2="XXZT";
         String s3="XXXZXYTM";
         System.out.println(isInterleaved(s1.toCharArray(),s2.toCharArray(),s3.toCharArray()));
+        System.out.println(patternCount_101("1001ab010abc01001"));
     }
 }

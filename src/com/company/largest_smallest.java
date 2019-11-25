@@ -100,6 +100,8 @@ public class largest_smallest {
     /*Largest element in array when array elements are repeated*/
     static int largestEleInRepeat(int arr[],int n){
         HashSet<Integer> set = new HashSet<>();
+        ArrayList<Integer> l = new ArrayList<>();
+
         for(int i=0;i<n;i++){
             set.add(arr[i]);
         }

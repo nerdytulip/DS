@@ -331,6 +331,100 @@ public class binarytree {
         return S;
     }
 
+    /*https://www.geeksforgeeks.org/sum-nodes-k-th-level-tree-represented-string/*/
+    static int sumAtKthLevel(String tree,int k){
+        int level=-1;
+        int sum=0;
+        int n=tree.length();
+        for (int i=0;i<n;i++){
+            if (tree.charAt(i)=='(')
+                level++;
+            else if (tree.charAt(i)==')')
+                level--;
+            else{
+                if (level==k)
+                    sum+=(tree.charAt(i)-'0');
+            }
+        }
+        return sum;
+    }
+    static int productAtKthLevel(String tree,int k){
+        int level=-1;
+        int product=1;
+        int n=tree.length();
+        for (int i=0;i<n;i++){
+            if(tree.charAt(i)=='(')
+                level++;
+            else if (tree.charAt(i)==')')
+                level--;
+            else{
+                if (level==k)
+                    product*=(tree.charAt(i)-'0');
+            }
+        }
+        return product;
+    }
+
+    //iterative approach
+    /*https://www.geeksforgeeks.org/difference-between-sums-of-odd-and-even-levels/*/
+    static int evenOddLevelDiff(Node root){
+     if (root==null)
+         return 0;
+     Queue<Node> q = new LinkedList<>();
+     q.add(root);
+     int level=0;
+     int evensum=0,oddsum=0;
+
+        while (q.size() != 0) {
+            int size = q.size();
+            level++;
+
+            // traverse for complete level
+            while (size > 0) {
+                Node temp = q.remove();
+
+                // check if level no.
+                // is even or odd and
+                // accordingly update
+                // the evenSum or oddSum
+                if (level % 2 == 0)
+                    evensum += temp.key;
+                else
+                    oddsum += temp.key;
+
+                // check for left child
+                if (temp.left != null)
+                    q.add(temp.left);
+
+                // check for right child
+                if (temp.right != null)
+                    q.add(temp.right);
+                size--;
+            }
+        }
+        return (oddsum-evensum);
+    }
+
+    //recursive approach
+    static int getLevelDiff(Node node){
+        if (node==null)
+            return 0;
+        return node.key-getLevelDiff(node.left)-getLevelDiff(node.right);
+    }
+    static void swapNodes_at_Kth_level_util(Node root,int level,int k){
+        if (root==null || (root.left==null && root.right==null))
+            return;
+        if((level+1)%k==0){
+            Node temp=root.left;
+            root.left=root.right;
+            root.right=temp;
+        }
+        swapNodes_at_Kth_level_util(root.left,level+1,k);
+        swapNodes_at_Kth_level_util(root.right,level+1,k);
+    }
+    static void swapNodes_at_Kth_level(Node root,int k){
+        swapNodes_at_Kth_level_util(root,1,k);
+    }
     public static void main(String[] args){
         /*root=new Node(10);
         root.left=new Node(11);
@@ -421,5 +515,20 @@ public class binarytree {
         System.out.println("maxsumpath"+ maxSumPath_between_two_leaf(root));
         System.out.println("minsumpath"+minSumPath_between_two_leaf(root1));
         System.out.println(diameter(root2));
+        String tree ="(0(5(6()())(4()(9()())))(7(1()())(3()())))";
+        System.out.println(sumAtKthLevel(tree,2));
+        System.out.println(productAtKthLevel(tree,2));
+
+        Node r = new Node(5);
+        r.left = new Node(2);
+        r.right = new Node(6);
+        r.left.left = new Node(1);
+        r.left.right = new Node(4);
+        r.left.right.left = new Node(3);
+        r.right.right = new Node(8);
+        r.right.right.right = new Node(9);
+        r.right.right.left = new Node(7);
+        System.out.println("diff between odd and even"+evenOddLevelDiff(r));
+        System.out.println("diff between"+getLevelDiff(r));
     }
 }

@@ -99,6 +99,14 @@ class LinkedList {
         return count;
     }
 
+    /*https://www.geeksforgeeks.org/in-a-linked-list-given-only-a-pointer-to-a-node-to-be-deleted-in-a-singly-linked-list-how-do-you-delete-it/
+    Fast solution is to copy the data from the next node to the node to be deleted and delete the next node*/
+    void delete_node_using_only_pointer_to_node(Node node){
+         Node temp =node.next;
+         node.data=temp.data;
+         node.next=temp.next;
+    }
+
     boolean search(Node gnode,int x){
      Node givennode= gnode;
      while(givennode != null){

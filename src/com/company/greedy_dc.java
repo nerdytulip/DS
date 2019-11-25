@@ -125,15 +125,15 @@ static int product_of_distinct_elementsofarray(int a[],int n){
 
 /*https://www.youtube.com/watch?v=eKp56OLhoQs
 * https://www.geeksforgeeks.org/sieve-of-eratosthenes/*/
-static void seiveOfErathenes(boolean prime[],int p_size){
+static void seiveOfErathenes(boolean prime[],int n){
     //ArrayList<Integer> l = new ArrayList<>();
     prime[0]=false;
     prime[1]=false;
-    for(int p=2;p*p<=p_size;p++){
+    for(int p=2;p*p<=n;p++){
         //if prime[p] is not changed,then it is a prime
         if(prime[p]){
             //update all the multiples of p
-            for(int i=p*p;i<=p_size;i+=p)
+            for(int i=p*p;i<=n;i+=p)
                 prime[i]=false;
         }
     }

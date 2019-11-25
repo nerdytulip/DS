@@ -271,6 +271,7 @@ Given N and number of players from each country and size K. Find the maximum num
              return c2.no-c1.no;
          }
      });
+
      for (Country c:countries){
          queue.offer(c);
      }

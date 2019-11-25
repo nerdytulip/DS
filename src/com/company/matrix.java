@@ -1,5 +1,6 @@
 package com.company;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -371,6 +372,116 @@ public class matrix {
         }
         return total;
     }
+    /* https://www.geeksforgeeks.org/given-matrix-o-x-find-largest-subsquare-surrounded-x/
+    The idea is to create two auxiliary arrays hor[N][N] and
+    ver[N][N]. The value stored in hor[i][j] is the number of horizontal continuous ‘X’ characters till mat[i][j]
+    in mat[][]. Similarly, the value stored in ver[i][j] is the number of vertical
+    continuous ‘X’ characters till mat[i][j] in mat[][]
+    Once we have filled values in hor[][] and ver[][], we start
+    from the bottommost-rightmost corner of matrix and move toward
+    the leftmost-topmost in row by row manner. For every visited entry mat[i][j],
+    we compare the values of hor[i][j] and ver[i][j], and pick the smaller
+    of two as we need a square. Let the smaller of two be ‘small’. After picking smaller of two,
+    we check if both ver[][] and hor[][] for left and up edges respectively. If they have entries for
+    the same, then we found a subsquare. Otherwise we try for small-1.
+    */
+    static int findSubSquare(int mat[][]){
+    int max=0;
+    int hor[][]=new int[mat.length][mat[0].length];
+    int ver[][]=new int[mat.length][mat[0].length];
+    if (mat[0][0]=='X'){
+        hor[0][0]=1;
+        ver[0][0]=1;
+    }
+
+    for (int i=0;i<mat.length;i++){
+        for (int j=0;j<mat[0].length;j++){
+            if (mat[i][j]=='O')
+                ver[i][j]=hor[i][j]=0;
+            else{
+                hor[i][j]=(j==0)?1:hor[i][j-1]+1;
+                ver[i][j]=(i==0)?1:ver[i-1][j]+1;
+            }
+        }
+    }
+
+    for(int i=mat.length-1;i>=1;i--){
+        for (int j=mat[0].length-1;j>=1;j--){
+            int small=Math.min(hor[i][j],ver[i][j]);
+            while(small>max)
+                if (ver[i][j-small+1]>=small && hor[i-small+1][j]>=small){
+                    max=small;
+                }
+              small--;
+            }
+        }
+    return max;
+    }
+
+    /*Maximum path sum that starting with any cell of 0-th row and ending with any cell of (N-1)-th row
+    * https://www.geeksforgeeks.org/maximum-path-sum-starting-cell-0-th-row-ending-cell-n-1-th-row/
+    from (i,j) we can only move into (i+1,j) ,(i+1,j-1) ,(i+1,j+1)
+    * */
+    static int MaximumPath(int mat[][]){
+        int N=4;
+        int result=0;
+        int dp[][]=new int[mat.length][mat[0].length];
+        for (int[] rows:dp)
+            Arrays.fill(rows,0);
+
+        //copy all the first element of rows into dp first columns
+        for (int i=0;i<N;i++)
+            dp[0][i+1]=mat[0][i];
+        for (int i=1;i<N;i++){
+            for (int j=1;j<=N;j++){
+                dp[i][j]=Math.max(dp[i-1][j-1],Math.max(dp[i-1][j],dp[i-1][j+1]))+mat[i][j-1];
+            }
+        }
+       // int index_r=N-1,index_c,max=0;
+
+        for (int i=0;i<=N;i++){
+            result=Math.max(result,dp[N-1][i]);
+            //index_c=i;
+        }
+        //max=result;
+        //maximum sum path
+        return result;
+    }
+
+    //min cost path to move ,when allowed to move from
+    //(i,j) to (i+1,j),(i,j+1),(i+1,j+1)
+    static int minCost(int cost[][],int m,int n){
+        int tc[][]=new int[m+1][n+1];
+        tc[0][0]=cost[0][0];
+        for (int i=1;i<=m;i++)
+            tc[i][0]=tc[i-1][0]+cost[i][0];
+        for (int j=1;j<=n;j++)
+            tc[0][j]=tc[0][j-1]+cost[0][j];
+
+        for (int i=1;i<=m;i++){
+            for (int j=1;j<=n;j++){
+                tc[i][j]=Math.min(tc[i-1][j-1],Math.min(tc[i-1][j],tc[i][j-1]))+cost[i][j];
+            }
+        }
+        return tc[m][n];
+    }
+
+    static int tsp(int graph[][],boolean[] v,int currPos,int n,int count,int cost,int ans){
+        if (count==n && graph[currPos][0]>0){
+            ans=Math.min(ans,cost+graph[currPos][0]);
+            return ans;
+        }
+
+        for (int i=0;i<n;i++){
+            if (v[i]==false && graph[currPos][i]>0){
+                v[i]=true;
+                ans=tsp(graph,v,i,n,count+1,cost+graph[currPos][i],ans);
+                v[i]=false;
+            }
+        }
+        return ans;
+    }
+
     public static void main(String args[]){
      int a[][]={{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
      //System.out.println("row"+a.length+"column"+a[0].length);
@@ -383,5 +494,35 @@ public class matrix {
      transpose_rectangular_matrix(A,B);
      //char[][] grid={{1,1,0,0,0},{1,1,0,0,0},{0,0,1,0,0},{0,0,0,1,1}};
      //System.out.println("num of islands"+numIslands(grid));
+        int Mat[][] = { { 4, 2, 3, 4 },
+                { 2, 9, 1, 10 },
+                { 15, 1, 3, 0 },
+                { 16, 92, 41, 44 } };
+        System.out.println(MaximumPath(Mat));
+
+        int cost[][]= {{1, 2, 3},
+                {4, 8, 2},
+                {1, 5, 3}};
+        System.out.println(minCost(cost,2,2));
+        int n = 4;
+
+        int[][] graph = {{0, 10, 15, 20},
+                {10, 0, 35, 25},
+                {15, 35, 0, 30},
+                {20, 25, 30, 0}};
+
+        // Boolean array to check if a node
+        // has been visited or not
+        boolean[] v = new boolean[n];
+
+        // Mark 0th node as visited
+        v[0] = true;
+        int ans = Integer.MAX_VALUE;
+
+        // Find the minimum weight Hamiltonian Cycle
+        ans = tsp(graph, v, 0, n, 1, 0, ans);
+
+        // ans is the minimum weight Hamiltonian Cycle
+        System.out.println(ans);
     }
 }

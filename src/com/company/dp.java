@@ -393,7 +393,7 @@ public class dp {
 
     }
 
-    /**
+    /*
      * Prints the actual edits which needs to be done.
      */
     static void printActualEdits(int T[][], char[] str1, char[] str2) {
@@ -427,6 +427,133 @@ public class dp {
         int l = Math.min(a, b);
         return Math.min(l, c);
     }
+
+    /*https://www.geeksforgeeks.org/finding-the-maximum-square-sub-matrix-with-all-equal-elements/*/
+    static int LargestKsubmatrix_withallequalelements(int a[][]){
+        int dp[][]=new int[a.length][a[0].length];
+        int result=0;
+        for (int i=0;i<a.length;i++){
+            for (int j=0;j<a[0].length;j++){
+                if (i==0||j==0)
+                    dp[i][j]=1;
+                else{
+                    if(a[i][j]==a[i-1][j] && a[i][j]==a[i][j-1]
+                        && a[i][j]==a[i-1][j-1]){
+                        dp[i][j]=Math.min(Math.min(dp[i-1][j],dp[i][j-1]),a[i-1][j-1])+1;
+                    }
+                    else
+                        dp[i][j]=1;
+                }
+                result= Math.max(result, dp[i][j]);
+            }
+        }
+        return result;
+    }
+    /*https://www.geeksforgeeks.org/given-n-x-n-square-matrix-find-sum-sub-squares-size-k-x-k/*/
+    static void PrintSumofsubsquare_of_k(int mat[][],int k){
+        int n=5;
+        if (k>mat.length)
+            return;
+        int stripSum[][]=new int[mat.length][mat[0].length];
+        //go column by column
+        for (int j=0;j<mat.length;j++){
+            int sum=0;
+            //sum of first k*1 rectangle in this column
+            for (int i=0;i<k;i++)
+                sum+=mat[i][j];
+            stripSum[0][j]=sum;
+
+            for (int i=1;i<mat.length-k+1;i++){
+                sum+=(mat[i+k-1][j]-mat[i-1][j]);
+                stripSum[i][j]=sum;
+            }
+        }
+
+        //calculate sum of subsquares using stripsum
+        for (int i=0;i<n-k+1;i++){
+            int sum=0;
+            //sum of first subsquare
+            for (int j=0;j<k;j++)
+                sum+=stripSum[i][j];
+            System.out.print(sum+" ");
+            //calculate the sum of remaining squares in current row
+            for (int j=1;j<n-k+1;j++){
+                sum+=(stripSum[i][j+k-1]-stripSum[i][j-1]);
+                System.out.print(sum+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    /*Print maximum sum square sub-matrix of given size
+    * https://www.geeksforgeeks.org/print-maximum-sum-square-sub-matrix-of-given-size/*/
+    static class Position{
+        int x;
+        int y;
+        Position(int x,int y){
+            this.x=x;
+            this.y=y;
+        }
+        void updatePosition(int x,int y){
+            this.x=x;
+            this.y=y;
+        }
+        int getXpos(){
+            return this.x;
+        }
+        int getYpos(){
+            return this.y;
+        }
+    }
+
+    /*https://www.geeksforgeeks.org/print-maximum-sum-square-sub-matrix-of-given-size/*/
+    static void printMax_Sum_SubsquareMatrix(int mat[][],int k){
+        int N=5;
+        if(k>N)
+            return;
+        int stripSum[][]=new int[N][N];
+        for (int j=0;j<N;j++){
+            int sum=0;
+            for (int i=0;i<k;i++)
+                sum+=mat[i][j];
+            stripSum[0][j]=sum;
+            //remaining rctangles
+            for (int i=1;i<N-k+1;i++){
+                sum+=(mat[i+k-1][j]-mat[i-1][j]);
+                stripSum[i][j]=sum;
+            }
+        }
+        int max_sum=Integer.MIN_VALUE;
+        Position pos = new Position(-1,-1);
+
+        //calculate sum of subsquares using stripsum
+        for (int i=0;i<N-k+1;i++){
+            int sum=0;
+            for (int j=0;j<k;j++)
+                sum+=stripSum[i][j];
+            if (sum>max_sum){
+                max_sum=sum;
+                pos.updatePosition(i,0);
+            }
+            //remaining squares
+            for (int j=1;j<N-k+1;j++){
+                sum+=(stripSum[i][j+k-1]-stripSum[i][j-1]);
+
+                if (sum>max_sum){
+                    max_sum=sum;
+                    pos.updatePosition(i,j);
+                }
+            }
+        }
+        for (int i=0;i<k;i++){
+            for (int j=0;j<k;j++){
+                System.out.print(mat[i+pos.getXpos()][j+pos.getYpos()]);
+            }
+            System.out.println();
+        }
+    }
+
+
     public static void main(String[] args){
        /* String A ="site:GeeksforGeeks.org";
         String B ="site:GeeksQuiz.com";
@@ -470,6 +597,27 @@ public class dp {
        System.out.println(result);
         int arr[] = {23,10,22,5,33,8,9,21,50,41,60,80,99, 22,23,24,25,26,27};
         System.out.println(LIS(arr,arr.length));
+
+        int a[][]={{2, 2, 3, 3, 4, 4},
+                {5, 5, 7, 7, 7, 4},
+                {1, 2, 7, 7, 7, 4},
+                {4, 4, 7, 7, 7, 4},
+                {5, 5, 5, 1, 2, 7},
+                {8, 7, 9, 4, 4, 4}};
+        System.out.println(LargestKsubmatrix_withallequalelements(a));
+        int mat[][]={{1, 1, 1, 1, 1},
+                {2, 2, 2, 2, 2},
+                {3, 3, 3, 3, 3},
+                {4, 4, 4, 4, 4},
+                {5, 5, 5, 5, 5},
+        };
+        PrintSumofsubsquare_of_k(mat,3);
+        int[][] mat1 = { { 1, 1, 1, 1, 1 },
+                { 2, 2, 2, 2, 2 },
+                { 3, 8, 6, 7, 3 },
+                { 4, 4, 4, 4, 4 },
+                { 5, 5, 5, 5, 5 } };
+        printMax_Sum_SubsquareMatrix(mat1,3);
     }
 }
 

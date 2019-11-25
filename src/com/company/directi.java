@@ -238,6 +238,41 @@ public class directi {
         }
         return sum+diff>=0?start:-1;
     }
+    static double findMedianSortedArrays(int in1[],int in2[]){
+        if (in1.length>in2.length)
+            return findMedianSortedArrays(in2,in1);
+        int x=in1.length;
+        int y=in2.length;
+        int low=0;
+        int high=x;
+        while(low<=high){
+            int partitionX=(low+high)/2;
+            int partitionY=(x+y+1)/2 - partitionX;
+            //if partitionX is 0 it means nothing is there on left side. Use -INF for maxLeftX
+            //if partitionX is length of input then there is nothing on right side. Use +INF for minRightX
+            int maxLeftX = (partitionX == 0) ? Integer.MIN_VALUE : in1[partitionX - 1];
+            int minRightX = (partitionX == x) ? Integer.MAX_VALUE : in1[partitionX];
+
+            int maxLeftY = (partitionY == 0) ? Integer.MIN_VALUE : in2[partitionY - 1];
+            int minRightY = (partitionY == y) ? Integer.MAX_VALUE : in2[partitionY];
+
+            if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+                //We have partitioned array at correct place
+                // Now get max of left elements and min of right elements to get the median in case of even length combined array size
+                // or get max of left for odd length combined array size.
+                if ((x + y) % 2 == 0) {
+                    return ((double)Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY))/2;
+                } else {
+                    return (double)Math.max(maxLeftX, maxLeftY);
+                }
+            } else if (maxLeftX > minRightY) { //we are too far on right side for partitionX. Go on left side.
+                high = partitionX - 1;
+            } else { //we are too far on left side for partitionX. Go on right side.
+                low = partitionX + 1;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
     public static void main(String[] args){
         int arrl[] ={1,2,10,5,5};
         int exit[]={4,5,12,9,12};
@@ -264,5 +299,8 @@ public class directi {
        int dist[]={6,5,3,5};
        System.out.println(getTour(petrol,dist,4));
 
+        int[] x = {1, 3, 8, 9, 15};
+        int[] y = {7, 11, 19, 21, 18, 25};
+        System.out.println(findMedianSortedArrays(x, y));
     }
 }
