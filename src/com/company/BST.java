@@ -470,6 +470,36 @@ public class BST {
            return (sum);
        }
    }
+
+   //ceil value is the smallest data larger than input value
+    static int ceil(Node node,int input){
+       if(node==null)
+           return -1;
+       if (node.key==input){
+           return node.key;
+       }
+       //if input is greater than roots key
+        //ceil must be in right side
+       if (input>node.key){
+           ceil(node.right,input);
+       }
+       //else ,either left subtree or root
+        //has the ceil value
+       int ceil=ceil(node.left,input);
+       return (ceil>input)?ceil:node.key;
+    }
+    static int floor(Node node,int input){
+       if (node==null)
+           return Integer.MAX_VALUE;
+       if (node.key==input)
+           return node.key;
+       //if input is less than node.key,then floor must be in left side
+       if (input<node.key)
+           return floor(node.left,input);
+       //else,the floor may lie in the right subtree or may be equal to the root
+       int floorValue=floor(node.right,input);
+       return (floorValue<=input)?floorValue:node.key;
+    }
     public static void main(String[] args){
         Node root =null;
         int keys[] ={15,10,20,8,12,16,25};

@@ -135,11 +135,69 @@ public class rearrange_rotations {
         }
         return false;
     }
+    static void num_of_flipsof0_to_getmaxconsecutive1(int a[],int m){
+        int start=0;int end=0;
+        int countzeros=0;
+        int bestwindow=0,bestwindowstart=0;
+        while (end<a.length){
+            if (countzeros<=m){
+                if (a[end]==0)
+                    countzeros++;
+                end++;//increasing window size
+            }
+            if (countzeros>m){
+                if (a[start]==0)
+                    countzeros--;
+                start++;//decreasing window size
+            }
+
+            if (end-start>bestwindow){
+                bestwindow=end-start;
+                bestwindowstart=start;
+            }
+        }
+
+        for (int i=0;i<bestwindow;i++){
+            if (a[bestwindowstart+i]==0)
+                System.out.println(bestwindowstart+i+" ");
+        }
+    }
+    static int search_in_sortedandrotated_without_using_pivot(int a[],int key){
+        if (a==null || a.length==0)
+            return -1;
+        int start=0;
+        int end=a.length-1;
+        while (start<=end){
+            int mid=(start+end)/2;
+            if (key==a[mid]){
+                return mid;}
+            if (a[start]<=a[mid]){
+                if (a[start]<=key && key<=a[mid]){
+                    end=mid-1;
+                }else{
+                    start=mid+1;
+                }
+            }
+            else{
+                if (a[mid]<=key && key<=a[end]){
+                    start=mid+1;
+                }
+                else{
+                    end=mid-1;
+                }
+            }
+        }
+        return -1;
+    }
     public static void main(String[] args){
         int a[]={1,2,3,4,5,6,7};
         int n=a.length;
         //System.out.println(rearrange(a,n));
         Juggling_leftrotate(a,2,n);
         printarray(a);
+
+        int m=2;
+        int ar[]={1, 0, 0, 1, 1, 0, 1, 0, 1, 1};
+        num_of_flipsof0_to_getmaxconsecutive1(ar,m);
     }
 }

@@ -425,7 +425,7 @@ public class matrix {
     static int MaximumPath(int mat[][]){
         int N=4;
         int result=0;
-        int dp[][]=new int[mat.length][mat[0].length];
+        int dp[][]=new int[mat.length][mat[0].length+2];
         for (int[] rows:dp)
             Arrays.fill(rows,0);
 

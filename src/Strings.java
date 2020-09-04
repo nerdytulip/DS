@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Strings {
     /*@https://www.geeksforgeeks.org/count-substrings-that-starts-with-character-x-and-ends-with-character-y/*/
@@ -221,6 +218,69 @@ public class Strings {
         //if all indices are marked,the return
         //smallest missing positive as arraysize+1
         return a.length+1;
+    }
+
+    static boolean isMatchingPair(char ch1,char ch2){
+        if (ch1=='(' && ch2==')' || ch1=='[' && ch2==']' || ch1=='{' && ch2=='}'){
+            return true;
+        }
+        return false;
+    }
+    static boolean isBalanced(String s){
+        Stack<Character> leftchars=new Stack<>();
+        for (int i=0;i<s.length();i++){
+            if (s.charAt(i)=='('|| s.charAt(i)=='['|| s.charAt(i)=='{'){
+                leftchars.push(s.charAt(i));
+            }
+            if (s.charAt(i)=='}' || s.charAt(i)==']' || s.charAt(i)==')'){
+                if (leftchars.isEmpty())
+                    return false;
+                else if(!isMatchingPair(leftchars.pop(),s.charAt(i))){
+                    return false;
+                }
+            }
+        }
+        if (leftchars.isEmpty())
+            return true;
+        return false;
+    }
+    static List<String> generateParenthesis(int num){
+        List<String> result=new ArrayList<>();
+        directedGenerateBalancedParen(num,num,"",result);
+        return result;
+    }
+    static  void directedGenerateBalancedParen(int numleftparen,int numrightparen,String parenString,List<String> result){
+        /* The recursion has bottomed out.
+    We have used all left and right parens necessary within constraints up
+    to this point. Therefore, the answer we add will be a valid paren string.
+
+    We can add this answer and then backtrack so the previous call can exhaust
+    more possibilities and express more answers...and then return to its caller,
+    etc. etc.
+    Yeah...this is what backtracking is all about.*/
+        if (numleftparen==0 || numrightparen==0){
+            result.add(parenString);
+            return;
+        }
+    /*
+    At each frame of the recursion we have 2 things we can do:
+    1.) Insert a left parenthesis
+    2.) Insert a right parenthesis
+    These represent all of the possibilities of paths we can take from this
+    respective call. The path that we can take all depends on the state coming
+    into this call.
+     */
+
+     /*
+    Can we insert a left parenthesis? Only if we have lefts remaining to insert
+    at this point in the recursion
+     */
+     if (numleftparen>0){
+         directedGenerateBalancedParen(numleftparen-1,numrightparen,parenString+"(",result);
+     }
+     if (numleftparen<numrightparen){
+         directedGenerateBalancedParen(numleftparen,numrightparen-1,parenString+")",result);
+     }
     }
     public static void main(String[] args){
 
