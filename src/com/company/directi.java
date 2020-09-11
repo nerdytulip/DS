@@ -66,7 +66,7 @@ public class directi {
         return S.substring(start_index,start_index+min_len);
     }
 
-    /*You are given two Strings S and A that consists of lowercase latin letters.Your task is to determine the number of special characters in S,A character is
+    /*You are given two com.company.Strings S and A that consists of lowercase latin letters.Your task is to determine the number of special characters in S,A character is
     said to be special if you remove all the occurences of that character from S,then:
      1.You get a substring M of the length greater than or equal to K
      2.M only consists of characters present in the String A*/

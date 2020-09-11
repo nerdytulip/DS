@@ -6,18 +6,25 @@ import java.util.ArrayList;
 public class primenums {
     static ArrayList<Integer> primenumbetween_2no(int n1,int n2){
         int flag;
+        //added functionality of nth prime,tc=nth number of prime
+        int tc=5;
+        int count=0;
         ArrayList<Integer> l = new ArrayList<>();
         for(int i=n1;i<=n2;i++){
             if(i==1|| i==0)
             { continue;}
             flag =1;
-            for(int j=2;j<i/2;++j){
+            for(int j=2;j<=i/2;++j){
                 if(i%j==0){
                     flag=0;
                     break;
                 }
             }
             if(flag==1){
+                count++;
+                if(count==tc){
+                    System.out.println("the"+tc+"th prime number is"+i);
+                }
                 l.add(i);
             }
         }

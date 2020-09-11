@@ -96,7 +96,7 @@ public class dp {
     }
     /*Given an array of non negative numbers and a total, is there subset of numbers in this array which adds up
      * to given total.*/
-    //TC-O(m*n)
+    //TC-O(m*n
     //https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
     static boolean SubsetSum(int input[],int total){
        boolean T[][]=new boolean[input.length+1][total +1];
@@ -404,6 +404,7 @@ public class dp {
                 break;
             }
             if (str1[i-1] == str2[j-1]) {
+                //do nothing
                 i = i-1;
                 j = j-1;
             } else if (T[i][j] == T[i-1][j-1] + 1){
@@ -428,7 +429,9 @@ public class dp {
         return Math.min(l, c);
     }
 
-    /*https://www.geeksforgeeks.org/finding-the-maximum-square-sub-matrix-with-all-equal-elements/*/
+    /*https://www.geeksforgeeks.org/finding-the-maximum-square-sub-matrix-with-all-equal-elements/
+    *https://www.youtube.com/watch?v=_Lf1looyJMU
+    */
     static int LargestKsubmatrix_withallequalelements(int a[][]){
         int dp[][]=new int[a.length][a[0].length];
         int result=0;

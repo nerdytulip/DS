@@ -125,6 +125,8 @@ static int product_of_distinct_elementsofarray(int a[],int n){
 
 /*https://www.youtube.com/watch?v=eKp56OLhoQs
 * https://www.geeksforgeeks.org/sieve-of-eratosthenes/*/
+/*p*p<=n because we have optimized the loop as if a number n does have factor till sqrt(n) ,then it is a prime number,so we need not to check more
+* here.p*p=n => p=sqrt(n)*/
 static void seiveOfErathenes(boolean prime[],int n){
     //ArrayList<Integer> l = new ArrayList<>();
     prime[0]=false;
@@ -207,6 +209,7 @@ static int MinStep(int a[],int n){
             step=step +(a[i]-1);
         }
     }
+    //arrays will only have 1,0,-1 s at this moment
     if(neg%2==0){
         //as the count of negative is even
         //so we just have to changes 0s to 1s
@@ -250,7 +253,8 @@ static void maxSumAfterKNegation(int a[],int k){
     }
     System.out.println("sum"+sum);
     System.out.println("min"+min);
-    System.out.println("k%2*min*2"+(k%2)*min*2);
+    int l =(k%2)*min*2;
+    System.out.println("k%2*min*2"+"  "+l);
     int res = sum -(k%2)*min*2;
     System.out.println(res);
 }
@@ -464,15 +468,15 @@ Thus,
 We see, for sum(i, j) i.e. for sum of any subarray to be
 divisible by k, the RHS should also be divisible by k.
 (q1 - q2)k is obviously divisible by k, for (rem1-rem2) to
-follow the same, rem1 = rem2 where
+follow the same...i.e,for (rem1-rem2)%k should be =0 ,,which means that  rem1 = rem2 where
     rem1 = Sum of subarray (0, j) % k
     rem2 = Sum of subarray (0, i-1) % k
     @https://www.geeksforgeeks.org/count-sub-arrays-sum-divisible-k/
-* So if any sub-array sum from index i’th to j’th is divisible by k then we can saya[0]+…a[i-1] (mod k) = a[0]+…+a[j] (mod k)
+* So if any sub-array sum from index i’th to j’th is divisible by k then we can say a[0]+…a[i-1] (mod k) = a[0]+…+a[j] (mod k)
 So we need to find such a pair of indices (i, j) that they satisfy the above condition. Here is the algorithm :
 Make an auxiliary array of size k as Mod[k] . This array holds the count of each remainder we are getting after dividing cumulative sum till any index in arr[].
 Now start calculating cumulative sum and simultaneously take it’s mod with K, whichever remainder we get increment count by 1 for remainder as index in Mod[] auxiliary array. Sub-array by each pair of positions with same value of ( cumSum % k) constitute a continuous range whose sum is divisible by K.
-Now traverse Mod[] auxiliary array, for any Mod[i] > 1 we can choose any to pair of indices for sub-array by (Mod[i]*(Mod[i] – 1))/2 number of ways . Do the same for all remainders < k and sum up the result that will be the number all possible sub-arrays divisible by K.*/
+Now traverse Mod[] auxiliary array, for any Mod[i] > 1 we can choose any to pair of indices for sub-array by (Mod[i]*(Mod[i] – 1))/2 (nC2=n(n-1)/2)number of ways . Do the same for all remainders < k and sum up the result that will be the number all possible sub-arrays divisible by K.*/
 static int subarray_with_sum_div_by_k(int a[],int n,int k){
     int mod[]=new int[k];
     Arrays.fill(mod,0);
@@ -503,9 +507,9 @@ public static void main(String[] args){
   int n2 =array.length;
   System.out.println(MinStep(array,n2));*/
 
-  /*int a[]={-2, 0, 5, -1, 2};
+  int a[]={-2, 0, 5, -1, 2};
   maxSumAfterKNegation(a,5);
-  int array[]= {1,2,4,8};
+  /*int array[]= {1,2,4,8};
   int n =array.length;
   System.out.println(MaxSumDiff(array,n));
     int arr[] = { 8, 4, 5, 2, 10 };
@@ -515,10 +519,10 @@ public static void main(String[] args){
 
     //int a[] = { 2, 3, 4, 5, 4 };
    // int b[] = { 3, 4, 2, 3, 2 };
-    int a[] = {1, 2, -3};
+    /*int a[] = {1, 2, -3};
     int b[]  = {-2, 3, -5};
     int n = 3, k = 5;
-    System.out.println(minProd(a,b,n,k));
+    System.out.println(minProd(a,b,n,k));*/
     List<Pair> activities = Arrays.asList(new Pair(1, 4), new Pair(3, 5),
             new Pair(0, 6), new Pair(5, 7), new Pair(3, 8),
             new Pair(5, 9), new Pair(6, 10), new Pair(8, 11),
