@@ -596,7 +596,243 @@ public class Strings {
             System.out.println("Found at Index " +
                     (N - M));
     }
-    public static void main(String[] args){
+    /*https://www.geeksforgeeks.org/given-a-string-find-its-first-non-repeating-character/
+    *TC-O(n^2) */
+    static int FirstNonRepeatingchar(String str){
+        char count[]=new char[256];
+        for (int i = 0; i < str.length(); i++)
+            count[str.charAt(i)]++;
+        int index = -1;
+        for (int i = 0; i < str.length(); i++) {
+            if (count[str.charAt(i)] == 1) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    /*This is method 2 for above approach
+    * TC-O(n) and SC-O(n)
+    * make hashmap and store both the first occurence and total count of occurence,
+    * then just scan the hashmap instead and the character which has least value of first occurence and frequency value as unity.  */
+
+    static class CountIndex{
+        int count,index;
+        /*constructor for first occurence*/
+        public CountIndex(int index){
+            this.count=1;
+            this.index=index;
+        }
+        public void incCount(){
+            this.count++;
+        }
+    }
+    static int firstNonRepeating(String str){
+        HashMap<Character, CountIndex> hm
+                = new HashMap<Character, CountIndex>(256);
+
+        for (int i = 0; i < str.length(); i++) {
+            // If character already occurred,
+            if (hm.containsKey(str.charAt(i))) {
+                // updating count
+                hm.get(str.charAt(i)).incCount();
+            }
+
+            // If it's first occurrence, then store
+            // the index and count = 1
+            else {
+                hm.put(str.charAt(i), new CountIndex(i));
+            }
+        }
+        int result = Integer.MAX_VALUE;
+        for (Map.Entry<Character, CountIndex> entry : hm.entrySet())
+        {
+            int c=entry.getValue().count;
+            int ind=entry.getValue().index;
+            if(c==1 && ind < result)
+            {
+                result=ind;
+            }
+        }
+        return result;
+    }
+
+    /*https://www.geeksforgeeks.org/kth-non-repeating-character/*/
+    // Returns index of k'th non-repeating character in
+    // given string str[]
+    static int kthNonRepeating(String str, int k)
+    {
+        int MAX_CHAR=256;
+        int n = str.length();
+
+        // count[x] is going to store count of
+        // character 'x' in str. If x is not present,
+        // then it is going to store 0.
+        int[] count = new int[MAX_CHAR];
+
+        // index[x] is going to store index of character
+        // 'x' in str.  If x is not  present or x is
+        // repeating, then it is going to store  a value
+        // (for example, length of string) that cannot be
+        // a valid index in str[]
+        int[] index = new int[MAX_CHAR];
+
+        // Initialize counts of all characters and indexes
+        // of non-repeating  characters.
+        for (int i = 0; i < MAX_CHAR; i++)
+        {
+            count[i] = 0;
+            index[i] = n;  // A value more than any index
+            // in str[]
+        }
+
+        // Traverse the input string
+        for (int i = 0; i < n; i++)
+        {
+            // Find current character and increment its
+            // count
+            char x = str.charAt(i);
+            ++count[x];
+
+            // If this is first occurrence, then set value
+            // in index as index of it.
+            if (count[x] == 1)
+                index[x] = i;
+
+            // If character repeats, then remove it from
+            // index[]
+            if (count[x] == 2)
+                index[x] = n;
+        }
+
+        // Sort index[] in increasing order.  This step
+        // takes O(1) time as size of index is 256 only
+        Arrays.sort(index);
+
+        // After sorting, if index[k-1] is value, then
+        // return it, else return -1.
+        return (index[k-1] != n)? index[k-1] : -1;
+    }
+
+    /*https://www.geeksforgeeks.org/reverse-words-in-a-given-string/*/
+    static void reverseString(String s[]){
+        String ans = "";
+        for (int i = s.length - 1; i >= 0; i--) {
+            ans += s[i] + " ";
+        }
+        System.out.println("Reversed String:");
+        System.out.println(ans.substring(0, ans.length() - 1));
+    }
+
+    /*https://www.geeksforgeeks.org/first-string-from-the-given-array-whose-reverse-is-also-present-in-the-same-array/*/
+    static String getReversed(String[] words, int length) {
+
+        // Hashmap to store word as we traverse
+        Map<String, Boolean> reversedWordMap = new HashMap<>();
+
+        for (String word : words) {
+            StringBuilder reverse = new StringBuilder(word);
+            String reversed = reverse.reverse().toString();
+
+            // check if reversed word exists in map.
+            Boolean exists = reversedWordMap.get(reversed);
+            if (exists != null && exists.booleanValue()) {
+                return reversed;
+            } else {
+                // else put the word in map
+                reversedWordMap.put(word, true);
+            }
+
+        }
+        return "-1";
+    }
+
+    /*https://www.geeksforgeeks.org/longest-subsequence-equal-numbers-0-1/*/
+    static int lengthofLargestSubsequenceof1and0(int arr[],int n){
+        int countzero = 0, countone = 0;
+
+        // traverse binary array and count
+        // zeros and ones
+        for (int i = 0; i < n; i++)
+            if (arr[i] == 1)
+                countone++;
+            else
+                countzero++;
+
+        return Math.min(countone, countzero) * 2;
+    }
+
+    /*https://www.youtube.com/watch?v=9ZyLjjk536U&list=PLjKHUvMwTztuCoR0Tje43LLRkNiqbeIZv&index=23&t=0s
+    * https://www.geeksforgeeks.org/largest-subarray-with-equal-number-of-0s-and-1s/*/
+    static int largestsubarrayof1and0(int arr[], int n){
+        // Creates an empty hashMap hM
+        HashMap<Integer, Integer> hM
+                = new HashMap<Integer, Integer>();
+        // Initialize sum of elements
+        int sum = 0;
+        // Initialize result
+        int max_len = 0;
+        int ending_index = -1;
+        int start_index = 0;
+        for (int i = 0; i < n; i++) {
+            arr[i] = (arr[i] == 0) ? -1 : 1;
+        }
+        // Traverse through the given array
+        for (int i = 0; i < n; i++) {
+            // Add current element to sum
+            sum += arr[i];
+            // To handle sum=0 at last index
+            if (sum == 0) {
+                max_len = i + 1;
+                ending_index = i;
+            }
+            // If this sum is seen before,
+            // then update max_len if required
+            if (hM.containsKey(sum + n)) {
+                if (max_len < i - hM.get(sum + n)) {
+                    max_len = i - hM.get(sum + n);
+                    ending_index = i;
+                }
+            }
+            else // Else put this sum in hash table
+                hM.put(sum + n, i);
+        }
+        for (int i = 0; i < n; i++) {
+            arr[i] = (arr[i] == -1) ? 0 : 1;
+        }
+        int end = ending_index - max_len + 1;
+        System.out.println(end + " to " + ending_index);
+        return max_len;
+    }
+    static int longestsubstringwithequal1sand0s(String str){
+        HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+        // Initially difference is 0;
+        map. put(0, -1);
+        int res =0;
+        int count_0 = 0, count_1 = 0;
+        for(int i=0; i<str.length();i++)
+        {
+            // Keep track of count of 0s and 1s
+            if(str.charAt(i)=='0')
+                count_0++;
+            else
+                count_1++;
+            // If difference between current counts
+            // already exists, then substring between
+            // previous and current index has same
+            // no. of 0s and 1s. Update result if this
+            // substring is more than current result.
+            if(map.containsKey(count_1-count_0))
+                res = Math.max(res, (i - map.get(count_1-count_0)));
+                // If the current difference is seen first time.
+            else
+                map.put(count_1-count_0,i);
+        }
+        return res;
+    }
+
+    public  static void main(String[] args){
 
         String str = "acacacacacacac";
         int n = str.length();

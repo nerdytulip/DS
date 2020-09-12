@@ -269,6 +269,31 @@ public class dp {
         return T[maxIndex];
     }
 
+    /*https://www.youtube.com/watch?v=99ssGWhLPUE*/
+    static int maxSumincreasingSubsequence(int arr[]){
+        int T[] = new int[arr.length];
+
+        for (int i = 0; i < T.length; i++) {
+            T[i] = arr[i];
+        }
+
+        for(int i=1; i < T.length; i++){
+            for(int j = 0; j < i; j++){
+                if(arr[j] < arr[i]){
+                    T[i] = Math.max(T[i], T[j] + arr[i]);
+                }
+            }
+        }
+
+        int max = T[0];
+        for (int i=1; i < T.length; i++){
+            if(T[i] > max){
+                max = T[i];
+            }
+        }
+        return max;
+    }
+
     //TC-O(n)
     static void maximumsumSubarr_kadane(int arr[]){
         int maxsoFar=0,maxEndingHere=0,start=0,end=0;
@@ -621,6 +646,9 @@ public class dp {
                 { 4, 4, 4, 4, 4 },
                 { 5, 5, 5, 5, 5 } };
         printMax_Sum_SubsquareMatrix(mat1,3);
+        int b[] = {1, 101, 10, 2, 3, 100,4};
+        System.out.println(maxSumincreasingSubsequence(b));
+
     }
 }
 
