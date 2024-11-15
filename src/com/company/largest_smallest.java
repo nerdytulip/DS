@@ -3,7 +3,7 @@ package com.company;
 import java.util.*;
 
 public class largest_smallest {
-    //O(n)
+    //O(nlgon)
     static int Largest(int arr[],int n){
      Arrays.sort(arr);
      return arr[n-1];

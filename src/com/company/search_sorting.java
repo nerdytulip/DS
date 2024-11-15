@@ -16,6 +16,24 @@ public class search_sorting {
       return -1;
     }
 
+    //recursive solution
+    static int binarySearch_rec(int arr[],int s,int e,int key){
+        if(s>e){
+            return -1;
+        }
+
+        int mid = s + (e-s)/2;
+        if(arr[mid] == key){
+            return mid;
+        }
+
+        if(arr[mid] < key){
+            return binarySearch_rec(arr,mid+1,e,key);
+        }else{
+            return binarySearch_rec(arr,0,mid-1,key);
+        }
+    }
+
     //selection sort - O(n^2)
     static void selectionsort(int arr[])
     {
