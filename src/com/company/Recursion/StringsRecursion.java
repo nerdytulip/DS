@@ -1,6 +1,6 @@
-package com.company;
+package com.company.Recursion;
 
-public class StringsReecursion {
+public class StringsRecursion {
 
     public void reverseString1(char[] s) {
 

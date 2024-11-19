@@ -1,8 +1,6 @@
-package com.company;
+package com.company.TwoPointer;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class MergeSortedArrays {
 

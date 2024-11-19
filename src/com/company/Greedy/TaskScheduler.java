@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Greedy;
 
 import java.util.Comparator;
 import java.util.LinkedList;

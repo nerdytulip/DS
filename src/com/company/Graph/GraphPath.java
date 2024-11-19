@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Graph;
 
 import java.util.*;
 import java.util.LinkedList;
@@ -122,7 +122,7 @@ public class GraphPath {
                 //confirm of curr and i are connected and is not visited
                 if(graph[curr][i] == true && !visited[i]){
                     q.add(i);
-                    // we mark it visited while added to queue
+                    // we mark it visited while added to queue, so that we only add to queue if it is not visited
                     visited[i] = true;
                 }
             }
