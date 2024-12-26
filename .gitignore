@@ -1,0 +1,21 @@
+# Compiled class files
+*.class
+
+# Eclipse and IntelliJ output folders
+/bin/
+/build/
+/out/
+target/
+
+# IDE-specific files
+*.iml
+.idea/
+*.vscode/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
