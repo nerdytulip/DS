@@ -1,8 +1,0 @@
-# Ignore all .class files
-*.class
-
-# Ignore compiled output folders (common folders)
-/bin/
-/build/
-/out/
-/target/
