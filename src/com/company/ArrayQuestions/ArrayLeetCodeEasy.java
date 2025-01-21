@@ -1,4 +1,4 @@
-package com.company;
+package com.company.ArrayQuestions;
 
 import java.util.HashMap;
 
