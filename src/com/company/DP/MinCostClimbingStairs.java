@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 public class MinCostClimbingStairs {
 
+    /**
+     * https://leetcode.com/problems/min-cost-climbing-stairs/description/
+     * */
+
     //recursion
     public int minCostClimbingStairs(int[] cost) {
         int n = cost.length;
