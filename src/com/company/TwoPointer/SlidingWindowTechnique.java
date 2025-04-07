@@ -1,7 +1,9 @@
 package com.company.TwoPointer;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class SlidingWindowTechnique {
 
@@ -65,7 +67,7 @@ public class SlidingWindowTechnique {
 
     // In this question , k is also not given
     //https://leetcode.com/problems/longest-substring-without-repeating-characters/?envType=company&envId=amazon&favoriteSlug=amazon-three-months&difficulty=EASY%2CMEDIUM
-    public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstringWithoutRepeatingCharacters(String s) {
         int longest_str_length = Integer.MIN_VALUE;
         Map<Character,Integer> count_map = new HashMap<>();
         int i=0,j=0;
@@ -80,6 +82,7 @@ public class SlidingWindowTechnique {
             if(count_map.size() == j-i+1){
                 longest_str_length = Math.max(longest_str_length,j-i+1);
             }else if(count_map.size()< j-i+1){
+                //repeating char
                 while(count_map.size()<j-i+1){
                     count_map.put(s.charAt(i),count_map.get(s.charAt(i))-1);
                     if(count_map.get(s.charAt(i)) == 0){
@@ -92,6 +95,26 @@ public class SlidingWindowTechnique {
         }
 
         return longest_str_length;
+    }
+
+    public int lengthOfLongestSubstringWithoutRepeatingCharactersUsingHashSet(String s) {
+        Set<Character> charSet = new HashSet<>();
+
+        int maxLength = 0;
+        int left = 0;
+
+        for(int right = 0;right<s.length();right++){
+
+            while(charSet.contains(s.charAt(right))){
+                charSet.remove(s.charAt(left));
+                left++;
+            }
+
+            charSet.add(s.charAt(right));
+            maxLength = Math.max(maxLength,right - left +1);
+        }
+
+        return maxLength;
     }
 
     public static void main(String[] args){
