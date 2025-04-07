@@ -1,0 +1,17 @@
+Fibonacci Type (One/Two Step Dependency)
+
+Problems where the solution depends on the last one or two computed values.
+
+Heuristic:
+Recurrence: dp[i] = max(dp[i-1], arr[i] + dp[i-2])
+Space Optimization: Use two variables instead of an array.
+
+Problems:
+
+Climbing Stairs
+House Robber
+House Robber II
+N-th Tribonacci Number
+Maximum Sum of Non-Adjacent Elements
+Paint House
+Number of Derangements
