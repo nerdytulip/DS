@@ -1,0 +1,12 @@
+- **Longest Common Subsequence (LCS) Type**
+    - **Description:**  
+      Problems that involve finding the longest common subsequence or variations of it.
+    - **Recurrence:**
+        - `dp[i][j] = max(dp[i-1][j], dp[i][j-1])`
+        - `dp[i][j] = 1 + dp[i-1][j-1]` if characters match.
+    - **Problems:**
+        - Longest Common Subsequence
+        - Edit Distance
+        - Wildcard Matching
+        - Regular Expression Matching
+        - Longest Palindromic Subsequence

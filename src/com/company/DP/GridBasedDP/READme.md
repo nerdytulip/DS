@@ -1,0 +1,12 @@
+- **Grid-Based DP**
+    - **Description:**  
+      Problems where the state transition depends on neighboring cells in a grid.
+    - **Recurrence:**
+        - `dp[i][j] = cost[i][j] + min(dp[i-1][j], dp[i][j-1])`
+        - Used for path minimization, maximal areas, and matrix-based DP.
+    - **Problems:**
+        - Minimum Path Sum
+        - Maximal Square
+        - Maximal Rectangle
+        - Largest Square in a Matrix
+        - Paint House ✅ (Grid-Based Transition)

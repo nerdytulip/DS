@@ -1,0 +1,13 @@
+- **Unbounded Knapsack Type (Repeated Choices Allowed)**
+    - **Description:**  
+      Problems where items can be chosen multiple times.
+    - **Heuristic:**
+        - **Recurrence:** `dp[i][capacity] = max(dp[i-1][capacity], value[i] + dp[i][capacity - weight[i]])`
+    - **Problems:**
+        - Unbounded Knapsack
+        - Coin Change
+        - Rod Cutting Problem
+        - Combination Sum
+        - Perfect Squares
+        - Minimum Squares to Sum
+        - Pizza With 3n Slices
