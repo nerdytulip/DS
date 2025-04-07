@@ -1,0 +1,3 @@
+[submodule "privateFile"]
+	path = privateFile
+	url = https://github.com/nerdytulip/PrivateFile.git
