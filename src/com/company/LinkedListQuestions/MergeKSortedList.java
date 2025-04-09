@@ -2,16 +2,6 @@ package com.company.LinkedListQuestions;
 
 import java.util.PriorityQueue;
 
-// Definition for singly-linked list.
- class ListNode {
-    int val;
-    ListNode next;
-    ListNode() {}
-    ListNode(int val) { this.val = val; }
-    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- }
-
-
  // https://www.youtube.com/watch?v=ptYUCjfNhJY&pp=ygUibWVyZ2UgayBzb3J0ZWQgbGlzdHMgamF2YSBtaW4gaGVhcA%3D%3D
  // https://www.youtube.com/watch?v=ptYUCjfNhJY
  // https://www.youtube.com/watch?v=IgZ4EqbBi1Q
@@ -88,7 +78,23 @@ public class MergeKSortedList {
         ListNode l3 = new ListNode(2);
         l3.next = new ListNode(6);
 
-        ListNode[] lists = new ListNode[]{l1, l2, l3};
+        ListNode l4 = new ListNode(0);
+        l4.next = new ListNode(2);
+        l4.next.next = new ListNode(6);
+
+        // Creating l5: A sorted list like: 3 -> 4 -> 7 -> 8
+        ListNode l5 = new ListNode(3);
+        l5.next = new ListNode(4);
+        l5.next.next = new ListNode(7);
+        l5.next.next.next = new ListNode(8);
+
+        // Creating l6: A sorted list like: 1 -> 5 -> 9 -> 10
+        ListNode l6 = new ListNode(1);
+        l6.next = new ListNode(5);
+        l6.next.next = new ListNode(9);
+        l6.next.next.next = new ListNode(10);
+
+        ListNode[] lists = new ListNode[]{l1, l2, l3, l4, l5, l6};
 
         ListNode mergedHead = merger.mergeKListsOpt(lists);
 
