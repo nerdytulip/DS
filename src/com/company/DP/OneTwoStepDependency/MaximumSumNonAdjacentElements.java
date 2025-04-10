@@ -5,6 +5,9 @@ import java.util.Arrays;
 
 public class MaximumSumNonAdjacentElements {
 
+    /**
+     * https://gkgaurav31.github.io/posts/maximum-sum-such-that-no-two-elements-are-adjacent/
+     * */
     int maximumNonAdjacentSum(ArrayList<Integer> nums){
         int n = nums.size();
         int ans = solve(nums,n-1);

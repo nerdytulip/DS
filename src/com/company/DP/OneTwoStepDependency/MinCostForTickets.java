@@ -6,6 +6,7 @@ import java.util.Queue;
 
 public class MinCostForTickets {
 
+    /* https://leetcode.com/problems/minimum-cost-for-tickets/description/ */
     private int solveRec(int[] days, int[] costs,int index) {
         if(index>=days.length){
             return 0;

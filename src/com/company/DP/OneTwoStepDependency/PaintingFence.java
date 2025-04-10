@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class PaintingFence {
 
+    /* https://leetcode.com/problems/paint-fence/description/*/
+
     int solveRec(int n,int k){
         if(n==1){
             return k;

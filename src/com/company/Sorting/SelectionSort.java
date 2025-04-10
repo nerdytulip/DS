@@ -1,7 +1,12 @@
 package com.company.Sorting;
 
 public class SelectionSort {
+
+    // usecase - if you want to check if you array is already sorted
+    // or if you have limited memory available
     //selection sort - O(n^2)
+
+    // idea - divides array in two parts , the left would be sorted and right half would be unsorted
     static void selectionsort(int arr[])
     {
         int n = arr.length;

@@ -1,6 +1,6 @@
 - **Unbounded Knapsack Type (Repeated Choices Allowed)**
     - **Description:**  
-      Problems where items can be chosen multiple times.
+      Problems where items can be chosen multiple times - 	Capacity-based DP with multiple inclusion
     - **Heuristic:**
         - **Recurrence:** `dp[i][capacity] = max(dp[i-1][capacity], value[i] + dp[i][capacity - weight[i]])`
     - **Problems:**

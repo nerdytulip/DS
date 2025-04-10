@@ -2,7 +2,7 @@
     - **Description:**  
       Problems where the solution depends on the last one or two computed values.
     - **Heuristic:**
-        - **Recurrence:** `dp[i] = max(dp[i-1], arr[i] + dp[i-2])`
+        - **Recurrence:** `dp[i] = max/min(dp[i-1], arr[i] + dp[i-2])`
         - **Space Optimization:** Use two variables instead of an array.
     - **Problems:**
         - Climbing Stairs

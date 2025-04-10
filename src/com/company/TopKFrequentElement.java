@@ -28,6 +28,7 @@ public class TopKFrequentElement {
     }
 
     //o(n), o(n)
+    //uses bucket sort
     public int[] topKFrequent(int[] nums, int k) {
         List<Integer>[] bucket = new List[nums.length+1];
         Map<Integer,Integer> countMap = new HashMap<>();
