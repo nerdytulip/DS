@@ -10,4 +10,3 @@
         - Combination Sum
         - Perfect Squares
         - Minimum Squares to Sum
-        - Pizza With 3n Slices

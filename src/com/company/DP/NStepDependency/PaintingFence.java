@@ -1,4 +1,4 @@
-package com.company.DP.OneTwoStepDependency;
+package com.company.DP.NStepDependency;
 
 import java.util.Arrays;
 

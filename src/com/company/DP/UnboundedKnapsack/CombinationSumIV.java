@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public class CombinationSumIV {
 
+    /**
+     * https://leetcode.com/problems/combination-sum-iv/description/
+     * */
     int solveRec(int[] num,int target){
         if(target<0){
             return 0;

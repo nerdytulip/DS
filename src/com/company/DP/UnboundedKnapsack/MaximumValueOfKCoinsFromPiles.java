@@ -5,6 +5,7 @@ import java.util.List;
 
 public class MaximumValueOfKCoinsFromPiles {
 
+    // https://leetcode.com/problems/maximum-value-of-k-coins-from-piles/description/
     private int solveRec(List<List<Integer>> piles,int i, int k){
         if(i == piles.size() || k == 0){
             return 0;

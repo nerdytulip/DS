@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public class KnapsackProblem {
 
+    /**
+     * https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
+     * */
     int solveRec(int W, int wt[], int val[], int index ){
         //base case
         //if only 1 item to steal , the just compare it's weight with the knapsack capacity

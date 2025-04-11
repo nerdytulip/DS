@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class MinimumSquares {
 
     // https://www.geeksforgeeks.org/minimum-number-of-squares-whose-sum-equals-to-given-number-n/
+    // https://leetcode.com/problems/perfect-squares/description/?envType=study-plan-v2&envId=dynamic-programming
     int solveRec(int n){
         if(n == 0){
             return 0;
@@ -55,7 +56,7 @@ public class MinimumSquares {
         memo[0] = 0;
 
         for(int i=1;i<=n;i++){
-            for(int j = 1; i*j<=n;j++){
+            for(int j = 1; j*j<=n;j++){
                 int temp = j*j;
                 if(i-temp>=0) {
                     memo[i] = Math.min(memo[i], 1+ memo[i - temp]);

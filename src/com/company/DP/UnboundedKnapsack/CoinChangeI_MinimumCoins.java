@@ -2,7 +2,7 @@ package com.company.DP.UnboundedKnapsack;
 
 import java.util.Arrays;
 
-public class MinimumCoins {
+public class CoinChangeI_MinimumCoins {
 
     /**
      * https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/
@@ -18,8 +18,8 @@ public class MinimumCoins {
         }
 
         int mini = Integer.MAX_VALUE;
-        for(int i=0;i<coins.length;i++){
-            int ans = solveRec(coins,target-coins[i]);
+        for(int coin:coins){
+            int ans = solveRec(coins,target-coin);
             if(ans!=Integer.MAX_VALUE){
                 mini = Math.min(mini,1+ans);
             }
@@ -30,17 +30,6 @@ public class MinimumCoins {
 
     public int minimumAddedCoins(int[] coins, int target) {
         int ans = solveRec(coins,target);
-        if(ans == Integer.MAX_VALUE){
-            return -1;
-        }else{
-            return ans;
-        }
-    }
-
-    public int minimumAddedCoins_top_down(int[] coins, int target) {
-       int[] memo = new int[target+1];
-       int ans = solveMem(coins,target,memo);
-        Arrays.fill(memo,-1);
         if(ans == Integer.MAX_VALUE){
             return -1;
         }else{
@@ -63,8 +52,8 @@ public class MinimumCoins {
         }
 
         int mini = Integer.MAX_VALUE;
-        for (int i = 0; i < coins.length; i++) {
-            int ans = solveRec(coins, target - coins[i]);
+        for (int coin:coins) {
+            int ans = solveMem(coins, target - coin, memo);;
             if (ans != Integer.MAX_VALUE) {
                 mini = Math.min(mini, 1 + ans);
             }
@@ -72,6 +61,17 @@ public class MinimumCoins {
         memo[target] = mini;
 
         return mini;
+    }
+
+    public int minimumAddedCoins_top_down(int[] coins, int target) {
+        int[] memo = new int[target+1];
+        int ans = solveMem(coins,target,memo);
+        Arrays.fill(memo,-1);
+        if(ans == Integer.MAX_VALUE){
+            return -1;
+        }else{
+            return ans;
+        }
     }
 
     public int minimumAddedCoins_bottom_up(int[] coins, int target) {
@@ -98,8 +98,8 @@ public class MinimumCoins {
     }
 
     public static void main(String[] args){
-        MinimumCoins minimumCoins = new MinimumCoins();
+        CoinChangeI_MinimumCoins coinChangeIMinimumCoins = new CoinChangeI_MinimumCoins();
         int[] coins = {1,4,10};
-        System.out.println(minimumCoins.minimumAddedCoins_bottom_up(coins,19));
+        System.out.println(coinChangeIMinimumCoins.minimumAddedCoins_bottom_up(coins,19));
     }
 }

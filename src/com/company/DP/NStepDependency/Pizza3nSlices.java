@@ -1,4 +1,4 @@
-package com.company.DP.UnboundedKnapsack;
+package com.company.DP.NStepDependency;
 
 import java.util.Arrays;
 
@@ -16,6 +16,7 @@ public class Pizza3nSlices {
     }
 
     public int maxSizeSlicesRec(int[] slices) {
+        //3n=k
         int k = slices.length;
         //eat first slice
         int case1 = solveRec(0,k-2,slices,k/3);
@@ -88,7 +89,6 @@ public class Pizza3nSlices {
         int case1 = memo1[0][k/3];
 
         //eat last slice
-        //eat first slice
         for(int index= k-1;index>=1;index--){
             for(int n=1;n<=k/3;n++){
                 int take = slices[index] + memo2[index+2][n-1];
