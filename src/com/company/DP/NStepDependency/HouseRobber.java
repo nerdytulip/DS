@@ -2,7 +2,7 @@ package com.company.DP.NStepDependency;
 
 import java.util.ArrayList;
 
-public class HouseRobberyProblem {
+public class HouseRobber {
 
     /**
      * SAME as sum non adjacent

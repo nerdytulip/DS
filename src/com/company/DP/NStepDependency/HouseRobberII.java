@@ -2,7 +2,7 @@ package com.company.DP.NStepDependency;
 
 import java.util.ArrayList;
 
-public class HouseRobberyProblemII {
+public class HouseRobberII {
 
     /**
      * https://leetcode.com/problems/house-robber-ii/description/
@@ -47,7 +47,7 @@ public class HouseRobberyProblemII {
 
     public static void main(String[] args){
         int[] arr = {1,2,3,1};
-        HouseRobberyProblemII robberyProblem = new HouseRobberyProblemII();
+        HouseRobberII robberyProblem = new HouseRobberII();
         System.out.println(robberyProblem.houseRobber(arr));
 
     }

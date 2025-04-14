@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public class LongestPalindromicSubsequence {
 
+    /**
+     * https://leetcode.com/problems/longest-palindromic-subsequence/description/
+     * */
     private int solveSO(String text1, String text2){
         int[] curr = new int[text2.length()+1];
         Arrays.fill(curr,0);

@@ -1,4 +1,4 @@
-package com.company;
+package com.company.BinaryTree;
 
 import java.util.*;
 import java.util.LinkedList;
