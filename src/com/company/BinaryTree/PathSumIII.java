@@ -6,6 +6,10 @@ import java.util.HashMap;
 
 public class PathSumIII {
 
+    /**
+     * https://leetcode.com/problems/path-sum-iii/description/?envType=study-plan-v2&envId=leetcode-75
+     * https://www.youtube.com/watch?v=uZzvivFkgtM
+     * */
     public int pathSum_IncludeExclude(TreeNode root, int targetSum) {
         return pathSum(root, (long) targetSum);
     }
@@ -45,43 +49,46 @@ public class PathSumIII {
     }
 
     // Using prefix sum
+    // O(n)
     public int pathSum(TreeNode root, int sum) {
-        int count = 0;
-        HashMap<Long, Integer> h = new HashMap<>();
-        preorder(root, 0L,sum,h,count);
-        return count;
+        HashMap<Long, Integer> map = new HashMap<>();
+        return preorder(root, 0L,sum,map);
+
     }
 
-    public void preorder(TreeNode node, long currSum,int targetSum,HashMap<Long, Integer> h, int count) {
+    public int preorder(TreeNode node, long currSum,int targetSum,HashMap<Long, Integer> map) {
         if (node == null)
-            return;
+            return 0;
 
-        // The current prefix sum
+        // Update the current prefix sum.
         currSum += node.val;
+        int count = 0;
 
-        // Here is the sum we're looking for
-        if (currSum == targetSum)
+        // Explicitly check if the path from the root to the current node equals targetSum.
+        if (currSum == targetSum) {
             count++;
+        }
 
         // The number of times the curr_sum − k has occurred already,
         // determines the number of times a path with sum k
         // has occurred up to the current node
-        count += h.getOrDefault(currSum - targetSum, 0);
+        count += map.getOrDefault(currSum - targetSum, 0);
 
         //Add the current sum into the hashmap
         // to use it during the child node's processing
-        h.put(currSum, h.getOrDefault(currSum, 0) + 1);
+        map.put(currSum, map.getOrDefault(currSum, 0) + 1);
 
         // Process the left subtree
-        preorder(node.left, currSum,targetSum,h,count);
+        count += preorder(node.left, currSum,targetSum,map);
 
         // Process the right subtree
-        preorder(node.right, currSum,targetSum,h,count);
+        count += preorder(node.right, currSum,targetSum,map);
 
         // Remove the current sum from the hashmap
         // in order not to use it during
         // the parallel subtree processing
-        h.put(currSum, h.get(currSum) - 1);
-    }
+        map.put(currSum, map.get(currSum) - 1);
 
+        return count;
+    }
 }

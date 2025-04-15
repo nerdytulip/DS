@@ -6,6 +6,9 @@ import java.util.List;
 
 public class RussianDoll {
 
+    /**
+     * https://leetcode.com/problems/russian-doll-envelopes/description/
+     * */
     // DP with binary search - TC (nlogn)
     private int solveOptimal(int[][] envelopes){
         if(envelopes.length == 0){

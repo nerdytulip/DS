@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LongestIncreasingSubsequence {
+
+    /**
+     * https://leetcode.com/problems/longest-increasing-subsequence/description/
+     * */
     private int solveRec(int[] nums, int curr, int prev) {
         //base-case
         if (curr == nums.length) {
@@ -15,7 +19,7 @@ public class LongestIncreasingSubsequence {
         //prev is when you are standing at -1
         int take = 0;
         if (prev == -1 || nums[curr] > nums[prev]) {
-            //because prev = curr , and since included so we are moving prev to one point next
+            //for next call , we make increment curr i.e : curr +1 , and prev will point to current curr
             take = 1 + solveRec(nums, curr + 1, curr);
         }
 
@@ -53,6 +57,7 @@ public class LongestIncreasingSubsequence {
         //prev remains same because we did not pick the current element
         int notTake = 0 + solveMem(nums, curr + 1, prev, memo);
 
+        // since prev starts with -1 , hence +1
         memo[curr][prev + 1] = Math.max(take, notTake);
         return memo[curr][prev + 1];
     }
@@ -78,6 +83,7 @@ public class LongestIncreasingSubsequence {
         }
 
         for (int curr = n - 1; curr >= 0; curr--) {
+            // prev is always one behind current
             for (int prev = curr - 1; prev >= -1; prev--) {
 
                 //include
@@ -85,6 +91,14 @@ public class LongestIncreasingSubsequence {
                 int take = 0;
                 if (prev == -1 || nums[curr] > nums[prev]) {
                     //because prev = curr , and since included so we are moving prev to one point next
+                    /**
+                     * In the recursive approach, the "prev" index can be -1 to denote that no element has been picked so far. Since Java arrays cannot be indexed at -1, the table is structured so that a "prev" value of -1 is stored at index 0 of the second dimension. In other words, we use an offset of +1 such that:
+                     * prev = -1 maps to column index 0
+                     * prev = 0 maps to column index 1
+                     * and so on.
+                     *
+                     * we are by default adding +1 offset to second array dimension (which is prev)
+                     * */
                     take = 1 + memo[curr + 1][curr + 1];
                 }
 
@@ -117,6 +131,7 @@ public class LongestIncreasingSubsequence {
         Arrays.fill(next, 0);
 
         for (int curr = n - 1; curr >= 0; curr--) {
+            // prev starts from curr - 1
             for (int prev = curr - 1; prev >= -1; prev--) {
 
                 //include

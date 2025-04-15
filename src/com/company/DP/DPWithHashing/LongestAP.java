@@ -1,4 +1,4 @@
-package com.company.DP.LongestIncreasingSubsequenceType;
+package com.company.DP.DPWithHashing;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

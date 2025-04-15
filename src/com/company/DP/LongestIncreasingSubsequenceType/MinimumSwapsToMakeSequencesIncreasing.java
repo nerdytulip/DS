@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class MinimumSwapsToMakeSequencesIncreasing {
+
+    /**
+     * https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/description/
+     * */
     private int solveRec(int[] nums1, int[] nums2, int index, boolean swapped) {
         if(index == nums1.length){
             return 0;

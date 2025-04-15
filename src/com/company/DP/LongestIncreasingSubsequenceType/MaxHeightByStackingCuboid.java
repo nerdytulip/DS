@@ -4,30 +4,11 @@ import java.util.Arrays;
 
 public class MaxHeightByStackingCuboid {
 
-    // Check if 'base' can hold 'newBox'
-    private boolean canStack_1_Array(int[] base, int[] newBox) {
-        return base[0] <= newBox[0] && base[1] <= newBox[1] && base[2] <= newBox[2];
-    }
+    /**
+     * https://leetcode.com/problems/maximum-height-by-stacking-cuboids/description/
+     * */
 
-    // LIS Calculation for Maximum Height
-    private int calculateLIS_1_Array(int[][] cuboids, int n) {
-        int[] dp = new int[n]; // dp[i] = max height ending at i
-        int maxHeight = 0;
-
-        for (int i = 0; i < n; i++) {
-            dp[i] = cuboids[i][2]; // Start with current height
-            for (int j = 0; j < i; j++) {
-                if (canStack(cuboids[j], cuboids[i])) { // Check if stackable
-                    dp[i] = Math.max(dp[i], cuboids[i][2] + dp[j]);
-                }
-            }
-            maxHeight = Math.max(maxHeight, dp[i]); // Track global max height
-        }
-
-        return maxHeight;
-    }
-
-    private boolean canStack(int[] base, int[] newBox) {
+    private boolean canStack(int[] newBox,int[] base) {
         return  newBox[0] <= base[0]  && newBox[1] <= base[1] && newBox[2] <= base[2];
     }
 
@@ -44,7 +25,7 @@ public class MaxHeightByStackingCuboid {
 
                 // Case 1: Include current cuboid
                 int take = 0;
-                if (prev == -1 || canStack(cuboids[curr], cuboids[prev])) { // Valid stacking
+                if (prev == -1 || canStack(cuboids[prev],cuboids[curr])) { // Valid stacking
                     take = cuboids[curr][2] + next[curr + 1]; // Add current height
                 }
 
