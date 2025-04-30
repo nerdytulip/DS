@@ -12,7 +12,7 @@ public class UniqueBSTs {
 
         //think i as root nodes
         for(int i = 1; i<= n; i++){
-            ans+=numTrees(i-1) * numTrees(n -i);
+            ans+=solveRec(i-1) * solveRec(n -i);
         }
 
         return ans;

@@ -6,8 +6,8 @@ public class MergeSortedArrays {
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {
 
-        int midx = m -1;
-        int nidx = n -1;
+        int midx = m-1;
+        int nidx = n-1;
         int k = m+n -1;
 
         while (midx >= 0 && nidx >= 0) {

@@ -1,4 +1,4 @@
-package com.company.TwoPointer;
+package com.company.TwoPointer.SlidingWindow;
 
 public class MaximumAverageSubArray1 {
     public double findMaxAverage(int[] nums, int k) {

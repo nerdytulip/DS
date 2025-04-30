@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 public class GuessNumberHigherOrLower {
 
+    /**
+     * https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/
+     * */
+
     private int solveRec(int start,int end){
         if(start>=end){
             return 0;

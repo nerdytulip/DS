@@ -1,4 +1,4 @@
-package com.company.DP.DPWithDistinctWays;
+package com.company.DP.DPWithDistinctWays.GridBased;
 
 import java.util.Arrays;
 

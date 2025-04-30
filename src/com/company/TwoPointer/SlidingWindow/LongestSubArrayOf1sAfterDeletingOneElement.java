@@ -1,4 +1,4 @@
-package com.company.TwoPointer;
+package com.company.TwoPointer.SlidingWindow;
 
 public class LongestSubArrayOf1sAfterDeletingOneElement {
     public int longestSubarray(int[] nums) {

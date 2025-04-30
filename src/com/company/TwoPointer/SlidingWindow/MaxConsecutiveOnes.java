@@ -1,4 +1,4 @@
-package com.company.TwoPointer;
+package com.company.TwoPointer.SlidingWindow;
 
 public class MaxConsecutiveOnes {
     public int longestOnes(int[] nums, int k) {

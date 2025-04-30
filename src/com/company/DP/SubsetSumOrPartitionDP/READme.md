@@ -6,5 +6,5 @@
     - **Problems:**
         - Subset Sum Problem
         - Partition Equal Subset Sum
-        - Reducing Dishes
-        - Maximum Value of K Coins from Piles
+        
+        

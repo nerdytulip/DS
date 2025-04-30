@@ -50,7 +50,7 @@ public class GameOfLife {
                 }
 
                 //dead cell
-                // if dead => board[i][j] == 1 :
+                // if dead => board[i][j] == 0 :
                 // and live neighbours == 3 , then board[i][j] = 1
                 if(board[row][col] == 0 && liveNeighbour == 3){
                     indexValChangeMap.put(row + delimiter + col,1);

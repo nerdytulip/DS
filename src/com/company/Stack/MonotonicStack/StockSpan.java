@@ -1,4 +1,4 @@
-package com.company.MonotonicStack;
+package com.company.Stack.MonotonicStack;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

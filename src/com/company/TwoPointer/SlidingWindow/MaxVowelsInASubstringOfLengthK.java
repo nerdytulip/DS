@@ -1,4 +1,4 @@
-package com.company.TwoPointer;
+package com.company.TwoPointer.SlidingWindow;
 
 import java.util.Arrays;
 import java.util.HashSet;
