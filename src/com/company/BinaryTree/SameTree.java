@@ -1,6 +1,7 @@
 package com.company.BinaryTree;
 
-import java.util.ArrayDeque;
+import com.company.BinaryTree.NodeDTO.TreeNode;
+
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -32,8 +33,6 @@ public class SameTree {
             queue.add(first.right);
             queue.add(second.right);
         }
-
         return true;
-
     }
 }

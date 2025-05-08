@@ -1,6 +1,6 @@
 package com.company.DP.DPWithMergeInterval;
 
-import com.company.BinaryTree.TreeNode;
+import com.company.BinaryTree.NodeDTO.TreeNode;
 
 import java.util.*;
 

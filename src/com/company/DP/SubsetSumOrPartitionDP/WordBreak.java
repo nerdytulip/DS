@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 
 public class WordBreak {
+    /** https://www.youtube.com/watch?v=hK6Git1o42c&t=856s
+     * https://leetcode.com/problems/word-break/description/
+     *
+     */
     public boolean wordBreak(String s, List<String> wordDict) {
         HashSet<String> wordSet = new HashSet<>(wordDict);
 

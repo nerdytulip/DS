@@ -1,5 +1,7 @@
 package com.company.BinaryTree;
 
+import com.company.BinaryTree.NodeDTO.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 

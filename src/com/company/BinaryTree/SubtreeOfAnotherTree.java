@@ -1,5 +1,7 @@
 package com.company.BinaryTree;
 
+import com.company.BinaryTree.NodeDTO.TreeNode;
+
 public class SubtreeOfAnotherTree {
 
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {

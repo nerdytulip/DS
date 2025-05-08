@@ -1,6 +1,6 @@
 package com.company.DP.NStepDependency;
 
-import com.company.BinaryTree.TreeNode;
+import com.company.BinaryTree.NodeDTO.TreeNode;
 
 public class HouseRobberIII {
 

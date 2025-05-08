@@ -1,9 +1,9 @@
-package com.company.Graph;
+package com.company.Matrix;
 
 import java.util.*;
 import java.util.LinkedList;
 
-public class TheMazeProblemLeetcode {
+public class TheMazeProblem {
 
     public boolean hasPath(int[][] maze, int[] start, int[] destination) {
 

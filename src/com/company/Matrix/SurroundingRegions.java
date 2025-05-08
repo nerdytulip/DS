@@ -1,4 +1,4 @@
-package com.company.Graph;
+package com.company.Matrix;
 
 public class SurroundingRegions {
     public void solve(char[][] board) {

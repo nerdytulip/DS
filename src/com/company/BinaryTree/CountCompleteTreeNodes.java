@@ -1,5 +1,7 @@
 package com.company.BinaryTree;
 
+import com.company.BinaryTree.NodeDTO.TreeNode;
+
 public class CountCompleteTreeNodes {
     /**
      * https://leetcode.com/problems/count-complete-tree-nodes/description/

@@ -1,6 +1,6 @@
 package com.company.BinaryTree.BST;
 
-import com.company.BinaryTree.TreeNode;
+import com.company.BinaryTree.NodeDTO.TreeNode;
 
 public class RangeSumOfBST {
     public int rangeSumBST(TreeNode root, int low, int high) {

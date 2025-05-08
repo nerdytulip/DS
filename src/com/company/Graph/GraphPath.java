@@ -5,6 +5,9 @@ import java.util.LinkedList;
 
 public class GraphPath {
 
+    /**
+     * https://leetcode.com/problems/find-if-path-exists-in-graph/description/
+     * */
     public boolean validPath_list(int n, int[][] edges, int source, int destination){
         Map<Integer, List<Integer>> graph = new HashMap<>();
         for(int[] edge:edges){
@@ -86,7 +89,7 @@ public class GraphPath {
         return bfs_matrix(graph,source,destination,visited,n);
     }
 
-    private boolean dfs_matrix(boolean[][] graph, int src, int dest,boolean[] visited, int n) {
+    private boolean dfs_matrix(boolean[][] graph, int src, int dest, boolean[] visited, int n) {
         if(src == dest){
             return true;
         }

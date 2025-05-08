@@ -1,5 +1,7 @@
 package com.company.BinaryTree;
 
+import com.company.BinaryTree.NodeDTO.TreeNode;
+
 public class MaximumBinaryTree {
     /**
      * https://leetcode.com/problems/maximum-binary-tree/description/

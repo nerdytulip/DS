@@ -1,4 +1,4 @@
-package com.company.Graph;
+package com.company.Matrix;
 
 public class NumberOfIslands {
     //recursion
@@ -33,7 +33,4 @@ public class NumberOfIslands {
         dfs(grid,i,j+1);
         dfs(grid,i,j-1);
     }
-
-    //bfs
-
 }

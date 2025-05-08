@@ -1,4 +1,4 @@
-package com.company.DP.NStepDependency;
+package com.company.KadanesAlgorithm;
 
 public class MaximumSumSubArray {
 

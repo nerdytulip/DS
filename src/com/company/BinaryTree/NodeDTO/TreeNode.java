@@ -1,4 +1,4 @@
-package com.company.BinaryTree;
+package com.company.BinaryTree.NodeDTO;
 
 public class TreeNode {
     public int val;

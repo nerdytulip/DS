@@ -1,8 +1,12 @@
-package com.company.Graph;
+package com.company.Matrix;
 
 import java.util.HashMap;
 
 public class GameOfLife {
+
+    /**
+     * https://leetcode.com/problems/game-of-life/description/
+     * */
 
     public int countNeighbours(int[][] board, int r, int c){
         int count = 0;

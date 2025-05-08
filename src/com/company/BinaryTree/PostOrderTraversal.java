@@ -1,5 +1,7 @@
 package com.company.BinaryTree;
 
+import com.company.BinaryTree.NodeDTO.TreeNode;
+
 public class PostOrderTraversal {
     public void postOrderTraversal(TreeNode root){
         if(root == null){

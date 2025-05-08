@@ -1,4 +1,4 @@
-package com.company.ArrayQuestions;
+package com.company.BinarySearchAndApplications;
 
 public class SearchInARotatedSortedArray {
 

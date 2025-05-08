@@ -1,5 +1,7 @@
 package com.company.BinaryTree;
 
+import com.company.BinaryTree.NodeDTO.TreeNode;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;

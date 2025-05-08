@@ -1,5 +1,7 @@
 package com.company.BinaryTree;
 
+import com.company.BinaryTree.NodeDTO.TreeNode;
+
 public class LongestZigZagTraversal {
     public int longestZigZag(TreeNode root) {
         return Math.max(dfs(root, true, 0), dfs(root, false, 0));

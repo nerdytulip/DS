@@ -1,9 +1,14 @@
-package com.company.Graph;
+package com.company.Matrix;
 
 import java.util.Deque;
 import java.util.LinkedList;
 
 public class RottenOrange {
+
+    /**
+     * https://leetcode.com/problems/rotting-oranges/description/
+     * */
+
     // multisource bfs
     public int orangesRotting(int[][] grid) {
         int rows = grid.length, cols = grid[0].length;

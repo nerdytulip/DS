@@ -1,6 +1,11 @@
 package com.company.BinarySearchAndApplications;
 
 public class SearchInSortedAndRotatedArray {
+
+    /**
+     * OLD CLASS
+     * */
+
     static int search_in_sorted_and_rotated_arr_recursion(int arr[], int l, int h, int key){
         if(l>h)
             return -1;

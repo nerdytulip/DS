@@ -1,8 +1,9 @@
 package com.company.BinaryTree;
 
+import com.company.BinaryTree.NodeDTO.TreeNode;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Stack;
 
 public class PathSum {
     /**

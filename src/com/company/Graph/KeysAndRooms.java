@@ -3,6 +3,9 @@ package com.company.Graph;
 import java.util.List;
 
 public class KeysAndRooms {
+    /**
+     * https://leetcode.com/problems/keys-and-rooms/description/
+     * */
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
         boolean[] visited = new boolean[rooms.size()];
         visited[0] = true;

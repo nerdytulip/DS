@@ -5,6 +5,8 @@ import java.util.*;
 public class EvaluateDivision {
     // Inner helper class to represent an edge in the graph.
     // Each edge holds a neighbor and the associated multiplication factor.
+    // https://leetcode.com/problems/evaluate-division/description/?envType=study-plan-v2&envId=top-interview-150
+    // https://www.youtube.com/watch?v=Uei1fwDoyKk
     private static class Edge {
         String neighbor;
         double value;

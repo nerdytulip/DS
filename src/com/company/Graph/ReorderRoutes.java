@@ -3,6 +3,13 @@ package com.company.Graph;
 import java.util.*;
 
 public class ReorderRoutes {
+
+    /**
+     * https://www.youtube.com/watch?v=42Z0eaopoZ8
+     * https://www.youtube.com/watch?v=m7svP1AyREk&t=595s
+     * https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/
+     * */
+
     // Helper class to represent a pair of values consisting of a node and a boolean indicating the edge's direction
     public static class Edge {
         int node;

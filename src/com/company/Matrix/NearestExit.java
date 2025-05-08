@@ -1,9 +1,13 @@
-package com.company.Graph;
+package com.company.Matrix;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class NearestExit {
+
+    /**
+     * https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/description/
+     * */
 
     private static class Cell {
         int row;
