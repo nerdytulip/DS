@@ -1,65 +1,61 @@
 package com.company.LinkedListQuestions;
 
-import java.util.HashMap;
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Map;
 
-class LRUCache {
+class KeyValuePair<K, V> {
+    K key;
+    V value;
+
+    public KeyValuePair(K key, V value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+
+class LRUCache<K, V> {
 
     /***
      *https://leetcode.com/problems/lru-cache/?envType=study-plan-v2&envId=top-interview-150
      * https://www.youtube.com/watch?v=9RQvjzszwsg
      */
 
-    private class LinkedListNode{
-        int key;
-        int value;
-
-        LinkedListNode(int key, int value){
-            this.key = key;
-            this.value = value;
-        }
-    }
-
+    private Deque<KeyValuePair<K, V>> list;
     private int capacity;
-    private Map<Integer,LinkedListNode> cache;
-    private LinkedList<LinkedListNode> lruList;
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
-        cache = new HashMap<>();
-        lruList = new LinkedList<>();
+        this.list = new LinkedList<>();
     }
 
-    public int get(int key) {
-        if(cache.containsKey(key)){
-            LinkedListNode node = cache.get(key);
-            lruList.remove(node);
-            lruList.addFirst(node);
-
-            return node.value;
+    public void put(K k, V v) {
+        KeyValuePair<K, V> existingPair = getItem(k);
+        if (existingPair != null) {
+            list.remove(existingPair); // remove old
+        } else if (list.size() == capacity) {
+            list.removeLast(); // remove LRU
         }
-        return -1;
+
+        list.addFirst(new KeyValuePair<>(k, v)); // insert MRU
     }
 
-    public void put(int key, int value) {
-        if(cache.containsKey(key)){
-            LinkedListNode node = cache.get(key);
-            lruList.remove(node);
-            // update the new value
-            node.value = value;
-            lruList.addFirst(node);
-        }else{
-            // we have to first check if it is beyond the capacity, remove last
-            if(cache.size()>=capacity){
-                LinkedListNode node = lruList.removeLast();
-                cache.remove(node.key);
+    public V get(K k) {
+        KeyValuePair<K, V> pair = getItem(k);
+        if (pair != null) {
+            list.remove(pair);
+            list.addFirst(pair);
+            return pair.value;
+        }
+        return null;
+    }
+
+    private KeyValuePair<K, V> getItem(K k) {
+        for (KeyValuePair<K, V> pair : list) {
+            if (pair.key.equals(k)) {
+                return pair;
             }
-
-            LinkedListNode node = new LinkedListNode(key,value);
-            lruList.addFirst(node);
-            cache.put(key,node);
         }
+        return null;
     }
 }
 

@@ -1,9 +1,7 @@
 package com.company.HashmapAndSet;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class WordPattern {
     public boolean wordPattern(String pattern, String s) {

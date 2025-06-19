@@ -1,8 +1,12 @@
-package com.company.TwoPointer;
+package com.company.SlidingWindow.fixed;
 
 import java.util.Arrays;
 
 public class ChocolateDistribution {
+    /**
+     * https://www.geeksforgeeks.org/chocolate-distribution-problem/
+     *
+     * */
     static int findMinDiff(int[] arr, int m){
         Arrays.sort(arr);
         int i = 0;

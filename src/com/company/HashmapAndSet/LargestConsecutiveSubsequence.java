@@ -19,7 +19,7 @@ public class LargestConsecutiveSubsequence {
             int currentLength = 1;
 
             int nextNum = num + 1;
-            while(exploredMap.containsKey(nextNum) && exploredMap.get(nextNum) == false){
+            while(exploredMap.containsKey(nextNum) && !exploredMap.get(nextNum)){
                 currentLength++;
                 exploredMap.put(nextNum,Boolean.TRUE);
 
@@ -28,7 +28,7 @@ public class LargestConsecutiveSubsequence {
             }
 
             int prevNum = num - 1;
-            while(exploredMap.containsKey(prevNum) && exploredMap.get(prevNum) == false){
+            while(exploredMap.containsKey(prevNum) && !exploredMap.get(prevNum)){
                 currentLength++;
                 exploredMap.put(prevNum,Boolean.TRUE);
                 prevNum--;

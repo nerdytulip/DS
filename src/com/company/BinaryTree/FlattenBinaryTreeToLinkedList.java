@@ -29,6 +29,7 @@ public class FlattenBinaryTreeToLinkedList {
         current.right = tempRight;
     }
 
+    //morris traversal
     public void flatten(TreeNode root){
         if(root == null){
             return;

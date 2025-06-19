@@ -1,6 +1,7 @@
-package com.company.TwoPointer.SlidingWindow;
+package com.company.SlidingWindow.variable;
 
 public class MaxConsecutiveOnes {
+    // https://leetcode.com/problems/max-consecutive-ones-iii/description/
     public int longestOnes(int[] nums, int k) {
         int countZeros = 0;
         int i=0,j=0;

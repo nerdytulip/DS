@@ -2,6 +2,9 @@ package com.company.TwoPointer;
 
 public class IsSubsequence {
 
+    /**
+     * https://leetcode.com/problems/is-subsequence/description/
+     * */
     public boolean isSubsequence(String s, String t) {
         int i =0;
         int j =0;

@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UniqueNumberOfOccurrences {
+    /**
+     * https://leetcode.com/problems/unique-number-of-occurrences/description/
+     * */
     public boolean uniqueOccurrences(int[] arr) {
         HashMap<Integer,Integer> map = new HashMap<>();
 

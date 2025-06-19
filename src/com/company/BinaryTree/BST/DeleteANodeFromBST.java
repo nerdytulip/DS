@@ -13,22 +13,25 @@ public class DeleteANodeFromBST {
             root.right = deleteNode(root.right,key);
         }else if(key < root.val){
             root.left = deleteNode(root.left,key);
-        }else{
-            // found the node where we have to delete
-            if(root.left == null){
-                return root.right;
-            } else if(root.right == null){
-                return root.left;
+        }// Node to be deleted is found
+        else {
+            // Case 1: Node has no left child
+            if (root.left == null) {
+                return root.right; // Replace node with right child (could be null or a subtree)
+            }
+            // Case 1: Node has no right child
+            else if (root.right == null) {
+                return root.left; // Replace node with left child
             }
 
-            // Case 2: Node with two children.
-            // Find the smallest node in the right subtree (inorder successor).
+            // Case 2: Node has two children
+            // Find the inorder successor (smallest value in right subtree)
             TreeNode minNode = findMin(root.right);
 
-            // Replace current node's value with the inorder successor's value.
+            // Copy the inorder successor's value to the current node
             root.val = minNode.val;
 
-            // Delete the inorder successor from the right subtree.
+            // Recursively delete the inorder successor from right subtree
             root.right = deleteNode(root.right, minNode.val);
         }
         return root;

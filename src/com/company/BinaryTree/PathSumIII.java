@@ -69,7 +69,7 @@ public class PathSumIII {
             count++;
         }
 
-        // The number of times the curr_sum − k has occurred already,
+        // The number of times the curr_sum − target has occurred already,
         // determines the number of times a path with sum k
         // has occurred up to the current node
         count += map.getOrDefault(currSum - targetSum, 0);

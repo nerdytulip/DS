@@ -5,6 +5,9 @@ import com.company.BinaryTree.NodeDTO.TreeNode;
 import java.util.*;
 
 public class ZigZagTraversal {
+    /**
+     * https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/
+     * */
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> zigzag = new ArrayList<>();
 
@@ -14,7 +17,7 @@ public class ZigZagTraversal {
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        boolean flag = false;
+        boolean flag = false; // true to mark it is reverse
 
         while(!queue.isEmpty()){
             int size = queue.size();

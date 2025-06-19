@@ -1,7 +1,8 @@
-package com.company.TwoPointer.SlidingWindow;
+package com.company.SlidingWindow.fixed;
 
 public class MaximumSumSubArrayOfSizeK {
     //Fixed sliding window
+    // https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
     public int maxSumSubArrayOfSizeK(int arr[], int k)
     {
         int i=0,j=0;

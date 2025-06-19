@@ -1,4 +1,4 @@
-package com.company.TwoPointer.SlidingWindow;
+package com.company.SlidingWindow.variable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +22,7 @@ public class MinimumWindowSubstring {
         while (j < s.length()) {
             char ch = s.charAt(j);
             if (countMap_T.containsKey(ch)) {
+                // subtracting to determine how much is needed
                 countMap_T.put(ch, countMap_T.get(ch) - 1);
                 if (countMap_T.get(ch) == 0) {
                     count--;

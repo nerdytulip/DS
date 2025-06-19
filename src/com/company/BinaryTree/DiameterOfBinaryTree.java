@@ -9,28 +9,20 @@ import java.util.Stack;
 public class DiameterOfBinaryTree {
 
     // recursive method
-    int max = 0;
-    private int diameterOfBinaryTree(TreeNode root) {
-        max = 1;
-        depth(root);
-        return max - 1;
+    public int diameterOfBinaryTree(TreeNode root) {
+        int[] max = new int[1]; // default to 0
+        depth(root, max);
+        return max[0];
     }
 
-    private int depth(TreeNode node)
-    {
-        if(node == null)
-        {
-            return 0;
-        }
+    private int depth(TreeNode node, int[] max) {
+        if (node == null) return 0;
 
-        int leftDepth = depth(node.left);
-        int rightDepth = depth(node.right);
+        int left = depth(node.left, max);
+        int right = depth(node.right, max);
 
-        // update the answer, because diameter of a
-        // tree is nothing but maximum value of
-        // (left_depth + right_depth + 1) for each node
-        max = Math.max(max, leftDepth + rightDepth + 1);
-        return 1 + Math.max(leftDepth, rightDepth);
+        max[0] = Math.max(max[0], left + right);
+        return 1 + Math.max(left, right);
     }
 
 

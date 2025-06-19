@@ -7,6 +7,10 @@ import static java.util.Collections.swap;
 
 public class PermutationsOfArray {
 
+    /**
+     * https://leetcode.com/problems/permutations/
+     * https://www.youtube.com/watch?v=H232aocj7bQ&t=1s
+     * */
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
         int index = 0;

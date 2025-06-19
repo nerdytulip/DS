@@ -14,11 +14,11 @@ public class DetermineIfTwoStringsAreClose {
         }
 
         for(char c:word1.toCharArray()){
-            countMapWord1.put(c,countMapWord1.getOrDefault(c,1)+1);
+            countMapWord1.put(c,countMapWord1.getOrDefault(c,0)+1);
         }
 
         for(char c:word2.toCharArray()){
-            countMapWord2.put(c,countMapWord2.getOrDefault(c,1)+1);
+            countMapWord2.put(c,countMapWord2.getOrDefault(c,0)+1);
         }
 
         if(!countMapWord1.keySet().equals(countMapWord2.keySet())){

@@ -40,4 +40,12 @@ public class CreateBinaryTreeFromPreAndInOrder {
         return root;
     }
 
+    public static void main(String[] args) {
+        int[] preorder = new int[]{3,9,20,15,7};
+        int [] inorder = new int[]{9,3,15,20,7};
+
+        CreateBinaryTreeFromPreAndInOrder sut = new CreateBinaryTreeFromPreAndInOrder();
+        sut.buildTree(preorder,inorder);
+    }
+
 }

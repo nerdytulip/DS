@@ -1,6 +1,7 @@
-package com.company.TwoPointer.SlidingWindow;
+package com.company.SlidingWindow.fixed;
 
 public class MaximumAverageSubArray1 {
+    // https://leetcode.com/problems/maximum-average-subarray-i/description/
     public double findMaxAverage(int[] nums, int k) {
         int i=0,j=0;
         double avg = 0;

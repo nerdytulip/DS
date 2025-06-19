@@ -1,11 +1,11 @@
-package com.company.BinaryTree;
+package com.company.BinaryTree.BST;
 
 import com.company.BinaryTree.NodeDTO.TreeNode;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class IsThisABinaryTree {
+public class IsThisABinarySearchTree {
     /**
      * https://www.hackerrank.com/challenges/is-binary-search-tree/problem
      * https://leetcode.com/problems/validate-binary-search-tree/description/

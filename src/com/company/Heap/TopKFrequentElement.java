@@ -3,6 +3,9 @@ package com.company.Heap;
 import java.util.*;
 
 public class TopKFrequentElement {
+
+    // https://www.youtube.com/watch?v=EBNPu0GgM64
+
     // nlogk
     public int[] topKFrequentMinHeap(int[] nums, int k) {
         Map<Integer,Integer> countMap = new HashMap<>();

@@ -1,9 +1,10 @@
-package com.company.TwoPointer.SlidingWindow;
+package com.company.SlidingWindow.fixed;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
 public class MaxVowelsInASubstringOfLengthK {
+    // https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/
     public int maxVowels(String s, int k) {
         int i=0,j=0;
         int noOfVowels = 0;

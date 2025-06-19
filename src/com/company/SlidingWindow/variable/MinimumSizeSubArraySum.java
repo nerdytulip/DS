@@ -1,25 +1,26 @@
-package com.company.TwoPointer.SlidingWindow;
+package com.company.SlidingWindow.variable;
 
 public class MinimumSizeSubArraySum {
+    // https://leetcode.com/problems/minimum-size-subarray-sum/description/
     public int minSubArrayLen(int target, int[] nums) {
         int minLenWindow = Integer.MAX_VALUE;
         int currentSum = 0;
 
-        int low =0;
-        int high =0;
+        int i =0;
+        int j =0;
 
-        while(high<nums.length) {
+        while(j<nums.length) {
 
-            currentSum += nums[high];
+            currentSum += nums[j];
 
             while (currentSum >= target) {
-                int currentWindowSize = high - low + 1;
+                int currentWindowSize = j - i + 1;
                 minLenWindow = Math.min(minLenWindow, currentWindowSize);
 
-                currentSum -= nums[low];
-                low++;
+                currentSum -= nums[i];
+                i++;
             }
-            high++;
+            j++;
         }
 
         return minLenWindow == Integer.MAX_VALUE ? 0 : minLenWindow;

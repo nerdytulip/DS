@@ -51,7 +51,7 @@ public class GroupAnagrams {
             return new ArrayList<>();
         }
 
-        Map<String, List> result = new HashMap<>();
+        Map<String, List<String>> result = new HashMap<>();
 
         for(String s: strs){
             char[] ca = s.toCharArray();

@@ -12,8 +12,8 @@ public class LCABinaryTree {
             return root;
         }
 
-        TreeNode leftAns = lowestCommonAncestor(root.right,p,q);
-        TreeNode rightAns = lowestCommonAncestor(root.left,p,q);
+        TreeNode leftAns = lowestCommonAncestor(root.left,p,q);
+        TreeNode rightAns = lowestCommonAncestor(root.right,p,q);
 
         if(leftAns == null){
             return rightAns;

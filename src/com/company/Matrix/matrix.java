@@ -1,10 +1,8 @@
-package com.company;
+package com.company.Matrix;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Stack;
 
 public class matrix {
     /*we have to follow the sequence as below
@@ -367,7 +365,7 @@ public class matrix {
             for (right=left;right<n;right++){
                 for (int i=0;i<n;++i)
                     temp[i]+=mat[i][right];
-                total+=greedy_dc.subarray_with_sum_div_by_k(temp,n,k);
+                //total+= greedy_dc.subarray_with_sum_div_by_k(temp,n,k);
             }
         }
         return total;
